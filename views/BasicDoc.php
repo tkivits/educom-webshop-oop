@@ -8,7 +8,7 @@ class BasicDoc extends HtmlDoc {
         $this->page = $page;
     }
     protected function showHeader() {
-        echo '<h1 class="header">{$this->page}</h1>';
+        echo '<h1 class="header">'.$this->page.'</h1>';
     }
     protected function showMenu() {
         include '../Pages/menu.php';

@@ -7,7 +7,7 @@ class HtmlDoc {
             '<!DOCTYPE html>
             <html>
             <head>
-            <link rel="stylesheet" href="CSS/stylesheet.css">
+            <link rel="stylesheet" href="../CSS/stylesheet.css">
             </head>
             <body>';
     }
