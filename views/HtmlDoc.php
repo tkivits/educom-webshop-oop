@@ -17,8 +17,8 @@ class HtmlDoc {
             </html>';
     }
     public function show() {
-        showDocStart()
-        showDocEnd()
+        $this->showDocStart();
+        $this->showDocEnd();
     }
 }
 
