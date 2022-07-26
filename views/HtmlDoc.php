@@ -2,7 +2,7 @@
 
 class HtmlDoc {
     //Methods
-    private function showDocStart() {
+    protected function showDocStart() {
         echo 
             '<!DOCTYPE html>
             <html>
@@ -11,7 +11,7 @@ class HtmlDoc {
             </head>
             <body>';
     }
-    private function showDocEnd() {
+    protected function showDocEnd() {
         echo 
             '</body>
             </html>';
