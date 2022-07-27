@@ -2,6 +2,10 @@
 include_once 'FormsDoc.php';
 class LoginDoc extends FormsDoc
 {
+    protected function showRequiredField()
+    {
+        echo '<div><span class="error">Fields with a * are required</span></div> ';
+    }
     protected function showFormStart()
     {
         echo '<form class="form" method="post">';
@@ -24,6 +28,7 @@ class LoginDoc extends FormsDoc
     }
     protected function showContent()
     {
+        $this->showRequiredField();
         $this->showFormStart();
         $this->showEmailInput();
         $this->showPasswordInput();
