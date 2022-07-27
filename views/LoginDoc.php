@@ -4,7 +4,7 @@ class LoginDoc extends FormsDoc
 {
     protected function showRequiredField()
     {
-        echo '<div><span class="error">Fields with a * are required</span></div> ';
+        echo '<div class="errordiv"><span class="error">Fields with a * are required</span></div> ';
     }
     protected function showFormStart()
     {
@@ -12,15 +12,15 @@ class LoginDoc extends FormsDoc
     }
     protected function showEmailInput()
     {
-        echo '<div><label for="email">E-mail:</label><input type="email" id="email" name="email"></div>';
+        echo '<div><label for="email">E-mail:</label><input type="email" id="email" name="email"><span class="error">  *</span></div>';
     }
     private function showPasswordInput()
     {
-        echo '<div><label for="password">Password:</label><input type="password" id="pw" name="pw"></div>';
+        echo '<div><label for="password">Password:</label><input type="password" id="pw" name="pw"><span class="error">  *</span></div>';
     }
     protected function showSubmitButton()
     {
-        echo '<input type="submit" value="Login">';
+        echo '<input class="submitbutton" type="submit" value="Login">';
     }
     protected function showFormEnd()
     {

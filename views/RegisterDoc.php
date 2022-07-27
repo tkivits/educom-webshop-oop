@@ -4,7 +4,7 @@ class RegisterDoc extends FormsDoc
 {
     protected function showRequiredField()
     {
-        echo '<div><span class="error">Fields with a * are required</span></div>';
+        echo '<div class="errordiv"><span class="error">Fields with a * are required</span></div>';
     }
     protected function showFormStart()
     {
@@ -12,23 +12,23 @@ class RegisterDoc extends FormsDoc
     }
     private function showNameInput()
     {
-        echo '<div><label for="name">Name:</label><input type="text" id="name" name="name"></div>';
+        echo '<div><label for="name">Name:</label><input type="text" id="name" name="name"><span class="error">  *</span></div>';
     }
     protected function showEmailInput()
     {
-        echo '<div><label for="email">E-mail:</label><input type="email" id="email" name="email"></div>';
+        echo '<div><label for="email">E-mail:</label><input type="email" id="email" name="email"><span class="error">  *</span></div>';
     }
     private function showPasswordInput()
     {
-        echo '<div><label for="password">Password:</label><input type="password" id="pw" name="pw"></div>';
+        echo '<div><label for="password">Password:</label><input type="password" id="pw" name="pw"><span class="error">  *</span></div>';
     }
     private function showRepeatPasswordInput()
     {
-        echo '<div><label for="repeat_password">Repeat password:</label><input type="password" id="pwrepeat" name="pwrepeat"></div>';
+        echo '<div><label for="repeat_password">Repeat password:</label><input type="password" id="pwrepeat" name="pwrepeat"><span class="error">  *</span></div>';
     }
     protected function showSubmitButton()
     {
-        echo '<input type="submit" value="Register">';
+        echo '<input class="submitbutton" type="submit" value="Register">';
     }
     protected function showFormEnd()
     {

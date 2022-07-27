@@ -39,8 +39,14 @@ body {
 	background-color: black;
 	text-align: right;
 }
-.form input, textarea {
+.form input {
 	width: 400px;
+	resize: none;
+}
+.form textarea {
+	width: 400px;
+	resize: none;
+	margin-left: 110px;
 }
 .form input[type="radio"], input[type="submit"] {
 	width: auto;
@@ -53,6 +59,13 @@ body {
 }
 .error { 
 	color: red; 
+}
+.errordiv {
+	margin-left: 110px;
+	margin-bottom: 10px;
+}
+.submitbutton {
+	margin-left: 110px;
 }
 .productimg {
 	display: block;
