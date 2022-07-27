@@ -2,17 +2,16 @@
 require_once 'BasicDoc.php';
 
 class AboutDoc extends BasicDoc {
-    private function showAboutPage() {
-        include '../Pages/about.php';
-    }
-    public function show(){
-        $this->showDocStart();
-        $this->showHeader();
-        $this->showMenu();
-        $this->showAboutPage();
-        $this->showFooter();
-        $this->showDocEnd();
+    protected function showContent() {
+        echo "My name is Teun Kivits. I am 28 years old and i live together with my girlfriend and our two cats.<br>Below you can see a list of some of my hobby's:
+                <ul>
+                <li>Strength sports like powerlifting and strongman</li>
+                <li>Listening to music</li>
+                <li>Going out with friends</li>
+                <li>Walks</li>
+                </ul>
+            Recently, I've started a traineeship at Educom where i'm learning to build websites like this one. Hopefully this will become a functional webshop!<br>
+            Right now i'm still learning though, as you can clearly see on this site."; 
     }
 }
-
 ?>

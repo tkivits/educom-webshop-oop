@@ -2,33 +2,42 @@
 
 class HtmlDoc {
     //Methods
-    private function showDocStart() {
+    private function showDocStart() 
+    {
         echo 
             '<!DOCTYPE html>
             <html>';
     }
-    private function showHeadStart() {
+    private function showHeadStart() 
+    {
         echo '<head>';
     }
-    protected function showHeadContent() {
-        echo '';
+    private function showHeadContent() 
+    {
+        echo '<link rel="stylesheet" href="../CSS/stylesheet.css">';
     }
-    private function showHeadEnd() {
+    private function showHeadEnd() 
+    {
         echo '</head>';
     }
-    private function showBodyStart() {
+    private function showBodyStart() 
+    {
         echo '<body>';
     }
-    protected function showBodyContent() {
+    protected function showBodyContent() 
+    {
         echo '';
     }
-    private function showBodyEnd() {
+    private function showBodyEnd() 
+    {
         echo '</body>';
     }
-    private function showDocEnd() {
+    private function showDocEnd() 
+    {
         echo '</html>';
     }
-    public function show() {
+    public function show() 
+    {
         $this->showDocStart();
         $this->showHeadStart();
         $this->showHeadContent();

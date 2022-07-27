@@ -13,6 +13,7 @@ class BasicDoc extends HtmlDoc {
     }
     private function showMenu() 
     {
+        echo '<div>';
         echo '<ul class="menu">';
         echo '<li><a href="?page=Home">Home</a></li>';
         echo '<li><a href="?page=About">About</a></li>';
@@ -26,6 +27,7 @@ class BasicDoc extends HtmlDoc {
             echo '<li><a href="?page=Logout">Logout '.$_SESSION['name'].'</a></li>';
         }
         echo '</u>';
+        echo '</div>';
     }
     private function showFooter() 
     {
