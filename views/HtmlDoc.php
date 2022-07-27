@@ -1,7 +1,7 @@
 <?php
 
-class HtmlDoc {
-    //Methods
+class HtmlDoc 
+{
     private function showDocStart() 
     {
         echo 

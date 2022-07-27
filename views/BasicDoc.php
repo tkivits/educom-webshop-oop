@@ -1,7 +1,8 @@
 <?php
 require_once "HtmlDoc.php";
 
-class BasicDoc extends HtmlDoc {
+class BasicDoc extends HtmlDoc 
+{
     public $page;
     public function __construct($page)
     {

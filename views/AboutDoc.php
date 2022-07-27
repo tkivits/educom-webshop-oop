@@ -1,8 +1,10 @@
 <?php 
 require_once 'BasicDoc.php';
 
-class AboutDoc extends BasicDoc {
-    protected function showContent() {
+class AboutDoc extends BasicDoc 
+{
+    protected function showContent() 
+    {
         echo "My name is Teun Kivits. I am 28 years old and i live together with my girlfriend and our two cats.<br>Below you can see a list of some of my hobby's:
                 <ul>
                 <li>Strength sports like powerlifting and strongman</li>
