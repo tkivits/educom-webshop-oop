@@ -1,28 +1,15 @@
 <?php
-require_once 'BasicDoc.php';
-class WebshopDoc extends BasicDoc 
+require_once 'ProductDoc.php';
+require_once '../dataLayer.php';
+class WebshopDoc extends ProductDoc 
 {
-    public $productid;
-    public $productimage;
-    public $productname;
-    public $productprice;
-
-    public function __construct($page, $productid, $productimage, $productname, $productprice)
+    protected function showProduct($id, $image, $name, $price) 
     {
-        $this->page = $page;
-        $this->id = $productid;
-        $this->image = $productimage;
-        $this->name = $productname;
-        $this->price = $productprice;
-    }
-    protected function showProduct()
-    {
-        //Iets met foreach of while
-        echo '<div class="menu">';
-        echo '<img class="productimg" src="'.$this->image.'" alt="'.$this->name.'"/>';
-        echo '<div class="title">'.$this->name.'</div></li>';
-        echo '<div class="price">'.$this->price.'</div></li>';
-        echo '</div>';
+        echo '<a href="?page='.$id.'">';
+        echo '<img class="productimg" src="'.$image.'" alt="'.$name.'"/>';
+        echo '</a>';
+        echo '<div class="title">'.$name.'</div></li>';
+        echo '<div class="price">'.$price.'</div></li>';
     }
     protected function showAddToCartButton()
     {
@@ -30,8 +17,22 @@ class WebshopDoc extends BasicDoc
     }
     protected function showContent()
     {
-        $this->showProduct();
-        $this->showAddToCartButton();
+        try {
+            $products = getAllProducts();
+            while ($product = mysqli_fetch_array($products))
+            {
+                echo '<div class="menu">';
+                $this->showProduct($product['ID'], $product['filename_image'], $product['name'], $product['price']);
+                if (isset($_SESSION['login']))
+                {
+                    $this->showAddToCartButton();
+                }
+                echo '</div>';
+            }
+        } catch (Exception $e) {
+            logError($e);
+            echo 'There seems to be a technical issue. Please try again later.';
+        }
     }
 }
 ?>

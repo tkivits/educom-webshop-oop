@@ -1,22 +1,20 @@
 <?php
 require_once 'ProductDoc.php';
-class WebshopDoc extends ProductDoc 
+require_once '../dataLayer.php';
+class DetailDoc extends ProductDoc 
 {
-    protected function showProductImage()
+    public $productid;
+    public function __construct($page, $productid)
     {
-        echo '<img class="productimg" src="'.$this->image.'" alt="'.$this->name.'"/>';
+        $this->id = $productid;
     }
-    protected function showProductName()
+    protected function showProduct($id, $image, $name, $price) 
     {
-        echo '<div class="title">'.$this->name.'</div></li>';
-    }
-    protected function showProductPrice()
-    {
-        echo '<div class="price">'.$this->price.'</div></li>';
-    }
-    private function showProductDescription()
-    {
-        echo '<div>'.$this->description.'</div>';
+        echo '<a href="?page='.$id.'">';
+        echo '<img class="productimg" src="'.$image.'" alt="'.$name.'"/>';
+        echo '</a>';
+        echo '<div class="title">'.$name.'</div></li>';
+        echo '<div class="price">'.$price.'</div></li>';
     }
     protected function showAddToCartButton()
     {
@@ -24,13 +22,23 @@ class WebshopDoc extends ProductDoc
     }
     protected function showContent()
     {
-        echo '<div class="menu">';
-        $this->showProductImage();
-        $this->showProductName();
-        $this->showProductPrice();
-        $this->showProductDescription();
-        $this->showAddToCartButton();
-        echo '</div>';
+	    try {
+		    $data = getSingleProduct($this->id);
+		    $product = mysqli_fetch_array($data);
+		    echo '<div class="menu">';
+		    $this->showProduct($product['ID'], $product['filename_image'], $product['name'], $product['price']);
+		    echo '<div>'.$product['item_description'].'</div></li>';
+		    if (isset($_SESSION['login'])) 
+            {
+			    $this->showAddToCartButton();
+		    }
+		    echo '</div>';
+	    } 
+        catch (Exception $e) 
+        {
+		    logError($e);
+		    echo 'There seems to be a technical issue. Please try again later.';
+	    }
     }
 }
 ?>
