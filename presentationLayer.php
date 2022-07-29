@@ -234,12 +234,15 @@ function processRequest($page) {
 				$page = 'Home';
 			}
 			break;
+		case 'Webshop';
+			addToCart();
+			break;
 		case 'Cart';
 			$data = updateCart();
-			if (empty($_SESSION['cart'])) {
-				$page = 'Empty cart';
-			} elseif ($data['valid'] == True) {
+			if ($data['valid'] == True) {
 				$page = 'Order complete';
+			} elseif (empty($_SESSION['cart'])) {
+				$page = 'Empty cart';
 			} else {
 				$page = 'Cart';
 			}

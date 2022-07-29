@@ -167,7 +167,7 @@ function logOutUser() {
 
 //addToCart
 function addToCart(){
-	if(isset($_POST['action'])){
+	if(isset($_POST['action']) && $_POST['action'] == 'AddToCart'){
 		$id = testInput($_POST['CartID']);
 		if (!isset($_SESSION['cart'])) {
 			try {
@@ -188,22 +188,19 @@ function addToCart(){
 			$_SESSION['cart'][$id] = $qty;
 		}
 	}
-	unset($_POST['add']);
 }
 
 //updateCart
 function updateCart() {
 	$valid = "";
-	if(isset($_POST['CartID']) && $_POST['action'] == 'updateCart') {
+	if(isset($_POST['CartID']) && $_POST['action'] == 'update') {
 		$item_id = testInput($_POST['CartID']);
 		$amount = testInput($_POST['amountCart']);
 		$_SESSION['cart'][$item_id] = $amount;
-		unset($_POST['CartID']);
-		unset($_POST['amountCart']);
 		$valid = False;
-	}
-	if(isset($_POST['termAgree'])) {
+	} elseif(isset($_POST['placeOrder']) && $_POST['action'] == 'placeOrder') {
 		registerOrder();
+		unset($_SESSION['cart']);
 		$valid = True;
 	}
 	return array('valid' => $valid);

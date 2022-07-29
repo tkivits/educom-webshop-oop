@@ -11,9 +11,13 @@ class WebshopDoc extends ProductDoc
         echo '<div class="title">'.$name.'</div></li>';
         echo '<div class="price">'.$price.'</div></li>';
     }
-    protected function showCartButton()
+    protected function showCartButton($productid)
     {
+        echo '<form method="post">';
+        echo '<input type="hidden" name="CartID", value="'.$productid.'">';
+        echo '<input type="hidden" name="action" value="AddToCart">';
         echo '<input class="cartButton" type="submit", value="Add to cart">';
+        echo '</form>';
     }
     protected function showContent()
     {
@@ -25,7 +29,7 @@ class WebshopDoc extends ProductDoc
                 $this->showProduct($product['ID'], $product['filename_image'], $product['name'], $product['price']);
                 if (isset($_SESSION['login']))
                 {
-                    $this->showCartButton();
+                    $this->showCartButton($product['ID']);
                 }
                 echo '</div>';
             }
