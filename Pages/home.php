@@ -1,1 +1,0 @@
-<?php echo "Welcome on this site"; ?>
