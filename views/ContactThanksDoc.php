@@ -1,6 +1,6 @@
 <?php
 include_once 'FormsDoc.php';
-class ContactDoc extends BasicDoc
+class ContactThanksDoc extends BasicDoc
 {
     public $sal;
     public $name;
@@ -43,13 +43,13 @@ class ContactDoc extends BasicDoc
         echo '<div>Message: '.$this->mess.'</div>';
     }
     protected function showContent()
-    [
+    {
         $this->showThankYou();
         $this->showDetails();
         $this->showEmail();
         $this->showPhone();
         $this->showCommunicationPreference();
         $this->showMessage();
-    ]
+    }
 }
 ?>
