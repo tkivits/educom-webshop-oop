@@ -16,7 +16,7 @@ class DetailDoc extends ProductDoc
         echo '<div class="title">'.$name.'</div></li>';
         echo '<div class="price">'.$price.'</div></li>';
     }
-    protected function showAddToCartButton()
+    protected function showCartButton()
     {
         echo '<input class="cartButton" type="submit", value="Add to cart">';
     }
@@ -30,7 +30,7 @@ class DetailDoc extends ProductDoc
 		    echo '<div>'.$product['item_description'].'</div></li>';
 		    if (isset($_SESSION['login'])) 
             {
-			    $this->showAddToCartButton();
+			    $this->showCartButton();
 		    }
 		    echo '</div>';
 	    } 
