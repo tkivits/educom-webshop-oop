@@ -1,6 +1,6 @@
 <?php
 require_once 'ProductDoc.php';
-require_once '../dataLayer.php';
+require_once 'dataLayer.php';
 class WebshopDoc extends ProductDoc 
 {
     protected function showProduct($id, $image, $name, $price) 

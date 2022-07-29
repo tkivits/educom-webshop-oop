@@ -14,7 +14,7 @@ class HtmlDoc
     }
     private function showHeadContent() 
     {
-        echo '<link rel="stylesheet" href="../CSS/stylesheet.css">';
+        echo '<link rel="stylesheet" href="CSS/stylesheet.css">';
     }
     private function showHeadEnd() 
     {

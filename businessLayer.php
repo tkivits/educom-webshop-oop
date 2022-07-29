@@ -70,8 +70,8 @@ function testContact() {
       if(empty($salErr) && empty($namErr) && empty($emailErr) && empty($phonErr) && empty($comprefErr) && empty($messErr)) {
 		$valid = True;
       }
-	  return array('sal' => $sal, 'salErr' => $salErr, 'name' => $name, 'namErr' => $namErr, 'email' => $email, 'emailErr' => $emailErr, 'phone' => $phone, 'phonErr' => $phonErr, 'compref' => $compref, 'comprefErr' => $comprefErr, 'mess' => $mess, 'messErr' => $messErr, 'valid' => $valid);
 	}
+	return array('sal' => $sal, 'salerr' => $salErr, 'name' => $name, 'namerr' => $namErr, 'email' => $email, 'emailerr' => $emailErr, 'phone' => $phone, 'phonerr' => $phonErr, 'compref' => $compref, 'compreferr' => $comprefErr, 'mess' => $mess, 'messerr' => $messErr, 'valid' => $valid);
 }
 
 //checkRegistration
@@ -114,8 +114,8 @@ function checkRegistration() {
 				logError($e);
 			}
 		}
-		return array('name' => $name, 'namErr' => $namErr, 'email' => $email, 'emailErr' => $emailErr, 'pw' => $pw, 'pwErr' => $pwErr, 'pwRepeat' => $pwrepeat, 'pwRepeatErr' => $pwRepeatErr, 'valid' => $valid);
-	} 
+	}
+	return array('name' => $name, 'namerr' => $namErr, 'email' => $email, 'emailerr' => $emailErr, 'pw' => $pw, 'pwerr' => $pwErr, 'pwrepeat' => $pwrepeat, 'pwrepeaterr' => $pwRepeatErr, 'valid' => $valid);
 }
 
 //logInUser
@@ -155,8 +155,8 @@ function logInUser() {
 		    $_SESSION['name'] = $user['name'];
 		    $valid = True;
 		}
-		return array('email' => $email, 'emailErr' => $emailErr, 'pw' => $pw, 'pwErr' => $pwErr, 'valid' => $valid);
 	}
+	return array('email' => $email, 'emailerr' => $emailErr, 'pw' => $pw, 'pwerr' => $pwErr, 'valid' => $valid);
 }
 
 //logOutUser

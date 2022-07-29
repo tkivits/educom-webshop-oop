@@ -1,11 +1,12 @@
 <?php
 require_once 'ProductDoc.php';
-require_once '../dataLayer.php';
+require_once 'dataLayer.php';
 class DetailDoc extends ProductDoc 
 {
     public $productid;
     public function __construct($page, $productid)
     {
+        $this->page = $page;
         $this->id = $productid;
     }
     protected function showProduct($id, $image, $name, $price) 

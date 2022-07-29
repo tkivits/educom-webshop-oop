@@ -236,13 +236,16 @@ function processRequest($page) {
 			break;
 		case 'Cart';
 			$data = updateCart();
-			if ($data['valid'] == True) {
-				$page = 'YourOrder';
+			if (empty($_SESSION['cart'])) {
+				$page = 'Empty cart';
+			} elseif ($data['valid'] == True) {
+				$page = 'Order complete';
 			} else {
 				$page = 'Cart';
 			}
 			break;
 		case is_numeric($page);
+			$data['productID'] = $page;
 			$page = 'Product';
 			break;
 		case 'Logout';
@@ -256,46 +259,66 @@ function processRequest($page) {
 
 //showResponsePage
 function showResponsePage($data){
-    showDocStart();
-	showHeader($data['page']);
-	showMenu();
 	switch($data['page'])
 	{
 		case 'Home';
-		  showHomePage();
+		  include_once "views/HomeDoc.php";
+		  $view = new HomeDoc($data['page']);
+		  $view->show();
 		  break;
 		case 'About';
-		  showAboutPage();
+		  include_once "views/AboutDoc.php";
+		  $view = new AboutDoc($data['page']);
+		  $view->show();
 		  break;
 		case 'Contact';
-		  showContactPage($data);
+		  include_once "views/ContactDoc.php";
+		  $view = new ContactDoc($data['page'], $data['sal'], $data['salerr'], $data['name'], $data['namerr'], $data['email'], $data['emailerr'], $data['phone'], $data['phonerr'], $data['compref'], $data['compreferr'], $data['mess'], $data['messerr']);
+		  $view->show();
 		  break;
 		case 'Thanks';
-		  showContactThanksPage($data);
+		  include_once "views/ContactThanksDoc.php";
+		  $view = new ContactThanksDoc($data['page'], $data['sal'], $data['name'], $data['email'], $data['phone'], $data['compref'], $data['mess']);
+		  $view -> show();
 		  break;
 		case 'Webshop';
-		  showWebshopPage();
+		  include_once "views/WebshopDoc.php";
+		  $view = new WebshopDoc($data['page']);
+		  $view->show();
 		  break;
 		case 'Product';
-		  showProductDetailPage();
+		  include_once "views/DetailDoc.php";
+		  $view = new DetailDoc($data['page'], $data['productID']);
+		  $view->show();
+		  break;
+		case 'Empty cart';
+		  include_once "views/EmptyCartDoc.php";
+		  $view = new EmptyCartDoc($data['page']);
+		  $view->show();
 		  break;
 		case 'Cart';
-		  showShoppingCartPage();
+		  include_once "views/CartDoc.php";
+		  $view = new CartDoc($data['page']);
+		  $view->show();
 		  break;
-		case 'YourOrder';
-		  showYourOrder();
+		case 'Order complete';
+		  include_once "views/OrderCompleteDoc.php";
+		  $view = new OrderCompleteDoc($data['page']);
+		  $view->show();
 		  break;
 		case 'Register';
-		  showRegisterPage($data);
+		  include_once "views/RegisterDoc.php";
+		  $view = new RegisterDoc($data['page'], $data['name'], $data['namerr'], $data['email'], $data['emailerr'], $data['pw'], $data['pwerr'], $data['pwrepeat'], $data['pwrepeaterr']);
+		  $view->show();
 		  break;
 		case 'Login';
-		  showLoginPage($data);
+		  include_once "views/LoginDoc.php";
+		  $view = new LoginDoc($data['page'], $data['email'], $data['emailerr'], $data['pw'], $data['pwerr']);
+		  $view -> show();
 		  break;
 		default; 
 		  showHomePage();
 	}
-	showFooter();
-    showDocEnd();
 }
 
 ?>
