@@ -5,7 +5,7 @@ class HomeDoc extends BasicDoc
 {
     protected function showContent() 
     {
-        $this->model->showHomeContent();
+        echo 'Welcome on this site!';
     }
 }
 ?>
