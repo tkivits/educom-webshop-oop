@@ -1,5 +1,5 @@
 <?php
-require_once 'models/PageModelClass';
+require_once('models/PageModelClass.php');
 
 class PageController
 {
