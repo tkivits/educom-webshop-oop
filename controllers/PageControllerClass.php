@@ -1,4 +1,5 @@
 <?php
+require_once 'models/PageModelClass';
 
 class PageController
 {
@@ -6,7 +7,7 @@ class PageController
 
     public function __construct()
     {
-        this->model = new PageModel();
+        $this->model = new PageModel();
     }
     public function handleRequest()
     {
