@@ -2,7 +2,6 @@
 
 class PageModel
 {
-    public $page;
     public function __construct()
     {
         $this->page = $this->getRequestedPage();
