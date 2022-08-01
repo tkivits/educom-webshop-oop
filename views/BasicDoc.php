@@ -3,14 +3,14 @@ require_once "HtmlDoc.php";
 
 class BasicDoc extends HtmlDoc 
 {
-    public $page;
-    public function __construct($page)
+    public $model;
+    public function __construct($model)
     {
-        $this->page = $page;
+        $this->model = $model;
     }
     private function showHeader() 
     {
-        echo '<h1 class="header">'.$this->page.'</h1>';
+        echo '<h1 class="header">'.$this->model->page.'</h1>';
     }
     private function showMenu() 
     {
