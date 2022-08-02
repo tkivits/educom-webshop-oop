@@ -17,6 +17,7 @@ class UserModel extends PageModel
   public $pwerr = '';
   public $pwrepeat = '';
   public $pwrepeaterr = '';
+  public $user = array();
   public $valid = False;
   public function __construct($pageModel)
   {
@@ -107,6 +108,44 @@ class UserModel extends PageModel
         }
       }
     }
+  }
+  function validateUser() 
+  {
+    if($_SERVER["REQUEST_METHOD"] == "POST") {
+      $this->email = $this->testInput($_POST['email']);
+      $this->pw = $this->testInput($_POST['pw']);
+        if (empty($this->email)) {
+          $this->emailerr = "E-mail is required";
+        } elseif (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+        $this->emailerr = "Invalid e-mail";
+      }
+        if (empty($this->pw)) {
+          $this->pwerr = "Password is required";
+      }
+      if(empty($this->emailerr) && empty($this->pwerr)) {
+        try {
+          $this->user = findUserByEmail($this->email);
+          if (empty($this->user) || $this->user['email'] !== $this->email) {
+            $this->emailerr= "Unknown e-mail";
+          }
+          if (empty($this->user) || $this->user['password'] !== $this->pw) {
+            $this->pwerr = "E-mail doesn't match password";
+          }
+        } catch (Exception $e) {
+          logError($e);
+        }
+      }
+        if(empty($this->emailerr) && empty($this->pwerr)) {
+          $this->valid = True;
+      }
+    }
+  }
+  function doLoginUser($id, $email, $name)
+  {
+    $_SESSION['user_id'] = $id;
+    $_SESSION['email'] = $email;
+    $_SESSION['name'] = $name;
+    $_SESSION['login'] = True;
   }
 }
 

@@ -38,7 +38,7 @@ class PageModel
         //$this->showMenuItem('Webshop');
         //geen login
         $this->showMenuItem('Register');
-        //$this->showMenuItem('Login');
+        $this->showMenuItem('Login');
         //wel login
         //$this->showMenuItem('Cart');
         //$this->showMenuItem('Logout', 'username');

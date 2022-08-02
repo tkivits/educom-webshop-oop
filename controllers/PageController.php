@@ -42,6 +42,17 @@ class PageController
                 $this->model->page = 'Register';
             }
             break;
+            case 'Login';
+            $this->model = new UserModel($this->model);
+            $this->model->validateUser();
+            if ($this->model->valid)
+            {
+                $this->model->doLoginUser($this->model->user['ID'], $this->model->user['email'], $this->model->user['name']);
+                $this->model->page = 'Home';
+            } else {
+                $this->model->page = 'Login';
+            }
+            break;
         }
     }
     private function showResponse()
@@ -71,6 +82,11 @@ class PageController
             case 'Register';
             include_once "views/RegisterDoc.php";
             $view = new RegisterDoc($this->model);
+            $view->show();
+            break;
+            case 'Login';
+            include_once "views/LoginDoc.php";
+            $view = new LoginDoc($this->model);
             $view->show();
             break;
         }
