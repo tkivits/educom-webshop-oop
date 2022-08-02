@@ -23,7 +23,7 @@ class UserModel extends PageModel
   {
       PARENT::__construct($pageModel);
   }
-  function validateContactForm() 
+  public function validateContactForm() 
   {
     if ($_SERVER['REQUEST_METHOD'] == 'POST'){
       if(empty($_POST["sal"])) {
@@ -70,7 +70,7 @@ class UserModel extends PageModel
       }
     }
   }
-  function validateRegistration() 
+  public function validateRegistration() 
   {
     if($_SERVER["REQUEST_METHOD"] == "POST") {
       $this->name = $this->testInput($_POST['name']);
@@ -109,7 +109,7 @@ class UserModel extends PageModel
       }
     }
   }
-  function validateUser() 
+  public function validateUser() 
   {
     if($_SERVER["REQUEST_METHOD"] == "POST") {
       $this->email = $this->testInput($_POST['email']);
@@ -140,12 +140,17 @@ class UserModel extends PageModel
       }
     }
   }
-  function doLoginUser($id, $email, $name)
+  public function doLoginUser($id, $email, $name)
   {
     $_SESSION['user_id'] = $id;
     $_SESSION['email'] = $email;
     $_SESSION['name'] = $name;
     $_SESSION['login'] = True;
+  }
+  public function doLogoutUser()
+  {
+    session_unset();
+    session_destroy();
   }
 }
 

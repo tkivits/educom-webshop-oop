@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once('models/PageModel.php');
 require_once('models/UserModel.php');
 require_once('controllers/PageController.php');

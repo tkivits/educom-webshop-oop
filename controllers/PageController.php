@@ -53,6 +53,11 @@ class PageController
                 $this->model->page = 'Login';
             }
             break;
+            case 'Logout';
+            $this->model = new UserModel($this->model);
+            $this->model->doLogoutUser();
+            $this->model->page = 'Home';
+            break;
         }
     }
     private function showResponse()

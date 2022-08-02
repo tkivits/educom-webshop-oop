@@ -36,12 +36,14 @@ class PageModel
         $this->showMenuItem('About');
         $this->showMenuItem('Contact');
         //$this->showMenuItem('Webshop');
-        //geen login
-        $this->showMenuItem('Register');
-        $this->showMenuItem('Login');
-        //wel login
-        //$this->showMenuItem('Cart');
-        //$this->showMenuItem('Logout', 'username');
+        if (!isset($_SESSION['login']))
+        {
+            $this->showMenuItem('Register');
+            $this->showMenuItem('Login');
+        } else {
+            //$this->showMenuItem('Cart');
+            $this->showMenuItem('Logout', $_SESSION['name']);
+        }
         $this->showMenuEnd();
     }
     private function showMenuStart()
