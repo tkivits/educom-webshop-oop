@@ -15,16 +15,6 @@ class PageModel
             $this->page = $_GET['page'];
         }
     }
-    protected function testInput($data)
-    {
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
-        return $data;
-    }
-    function logError($msg) {
-        echo "LOG TO SERVER: ".$msg;
-    }
     public function showHeader() 
     {
         echo '<h1 class="header">'.$this->page.'</h1>';
