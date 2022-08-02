@@ -23,9 +23,9 @@ class UserModel extends PageModel
   function validateContactForm() {
     if ($_SERVER['REQUEST_METHOD'] == 'POST'){
       if(empty($_POST["sal"])) {
-      $this->salErr = "Salutation is required";
+        $this->salerr = "Salutation is required";
       } else {
-       $this->sal = $this->testInput($_POST["sal"]);
+        $this->sal = $this->testInput($_POST["sal"]);
       }
       if(empty($_POST["name"])) {
         $this->namerr = "Name is required";

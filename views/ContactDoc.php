@@ -12,9 +12,9 @@ class ContactDoc extends FormsDoc
     }
     private function showSalutationInput()
     {
-        echo '<div><label for="salutation"></label>';
+        echo '<div><label for="sal"></label>';
         echo '<select id="sal" name="sal">';
-        echo '<option disabled selected value>Choose</option>';
+        echo '<option value="">Choose</option>';
         echo '<option value="Mr."';
         if ($this->model->sal == "Mr.") {echo "selected";};
         echo '>Mr.</option>';
