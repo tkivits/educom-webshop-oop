@@ -114,13 +114,13 @@ class UserModel extends PageModel
     if($_SERVER["REQUEST_METHOD"] == "POST") {
       $this->email = Util::testInput($_POST['email']);
       $this->pw = Util::testInput($_POST['pw']);
-        if (empty($this->email)) {
-          $this->emailerr = "E-mail is required";
-        } elseif (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+      if (empty($this->email)) {
+        $this->emailerr = "E-mail is required";
+      } elseif (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
         $this->emailerr = "Invalid e-mail";
       }
-        if (empty($this->pw)) {
-          $this->pwerr = "Password is required";
+      if (empty($this->pw)) {
+        $this->pwerr = "Password is required";
       }
       if(empty($this->emailerr) && empty($this->pwerr)) {
         try {
@@ -135,8 +135,8 @@ class UserModel extends PageModel
           Util::logError($e);
         }
       }
-        if(empty($this->emailerr) && empty($this->pwerr)) {
-          $this->valid = True;
+      if(empty($this->emailerr) && empty($this->pwerr)) {
+        $this->valid = True;
       }
     }
   }
