@@ -22,6 +22,9 @@ class PageModel
         $data = htmlspecialchars($data);
         return $data;
     }
+    function logError($msg) {
+        echo "LOG TO SERVER: ".$msg;
+    }
     public function showHeader() 
     {
         echo '<h1 class="header">'.$this->page.'</h1>';
@@ -34,7 +37,7 @@ class PageModel
         $this->showMenuItem('Contact');
         //$this->showMenuItem('Webshop');
         //geen login
-        //$this->showMenuItem('Register');
+        $this->showMenuItem('Register');
         //$this->showMenuItem('Login');
         //wel login
         //$this->showMenuItem('Cart');

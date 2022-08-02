@@ -1,6 +1,4 @@
 <?php
-require_once('models/PageModel.php');
-require_once('models/UserModel.php');
 
 class PageController
 {
@@ -34,6 +32,16 @@ class PageController
                 $this->model->page = 'Contact';
             }
             break;
+            case 'Register';
+            $this->model = new UserModel($this->model);
+            $this->model->validateRegistration();
+            if ($this->model->valid)
+            {
+                $this->model->page = 'Login';
+            } else {
+                $this->model->page = 'Register';
+            }
+            break;
         }
     }
     private function showResponse()
@@ -58,6 +66,11 @@ class PageController
             case 'Thanks';
             include_once "views/ContactThanksDoc.php";
             $view = new ContactThanksDoc($this->model);
+            $view->show();
+            break;
+            case 'Register';
+            include_once "views/RegisterDoc.php";
+            $view = new RegisterDoc($this->model);
             $view->show();
             break;
         }

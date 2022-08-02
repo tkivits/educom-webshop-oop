@@ -1,6 +1,4 @@
 <?php
-require_once 'PageModel.php';
-
 class UserModel extends PageModel
 {
   public $sal = '';
@@ -15,12 +13,17 @@ class UserModel extends PageModel
   public $compreferr = '';
   public $mess = '';
   public $messerr = '';
+  public $pw = '';
+  public $pwerr = '';
+  public $pwrepeat = '';
+  public $pwrepeaterr = '';
   public $valid = False;
   public function __construct($pageModel)
   {
       PARENT::__construct($pageModel);
   }
-  function validateContactForm() {
+  function validateContactForm() 
+  {
     if ($_SERVER['REQUEST_METHOD'] == 'POST'){
       if(empty($_POST["sal"])) {
         $this->salerr = "Salutation is required";
@@ -63,6 +66,45 @@ class UserModel extends PageModel
       }
       if(empty($this->salerr) && empty($this->namerr) && empty($this->emailerr) && empty($this->phonerr) && empty($this->compreferr) && empty($this->messerr)) {
         $this->valid = True;
+      }
+    }
+  }
+  function validateRegistration() 
+  {
+    if($_SERVER["REQUEST_METHOD"] == "POST") {
+      $this->name = $this->testInput($_POST['name']);
+      $this->email = $this->testInput($_POST['email']);
+      $this->pw = $this->testInput($_POST['pw']);
+      $this->pwrepeat = $this->testInput($_POST['pwrepeat']);
+      if (empty($_POST["name"])) {
+        $this->namerr = "Name is required";
+      } elseif (!preg_match("/^[a-zA-Z-' ]*$/", $this->name)) {
+        $this->namerr = "Only letters and spaces are allowed";
+      }
+      if (empty($_POST["email"])) {
+        $this->emailerr = "E-mail is required";
+      } elseif (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+        $this->emailerr = "Invalid e-mail";
+        }
+      if (empty($_POST["pw"])) {
+        $this->pwerr = "Password is required";
+      }
+      if (empty($_POST["pwrepeat"])) {
+        $this->pwrepeaterr = "Please repeat your password";
+      } elseif ($this->pw !== $this->pwrepeat) {
+        $this->pwrepeaterr = "Entered passwords do not match";
+      }
+      $user = findUserByEmail($this->email);
+      if (isset($user['email'])) {
+        $this->emailerr = "E-mail already exists";
+      }
+      if (empty($this->namerr) && empty($this->emailerr) && empty($this->pwerr) && empty($this->pwrepeaterr)) {
+        try {
+          registerNewUser($this->email, $this->name, $this->pw);
+          $this->valid = True;
+        } catch (Exception $e) {
+          logError($e);
+        }
       }
     }
   }
