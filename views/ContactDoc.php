@@ -14,7 +14,7 @@ class ContactDoc extends FormsDoc
     {
         echo '<div><label for="salutation"></label>';
         echo '<select id="sal" name="sal">';
-        echo '<option value="">Choose</option>';
+        echo '<option disabled selected value>Choose</option>';
         echo '<option value="Mr."';
         if ($this->model->sal == "Mr.") {echo "selected";};
         echo '>Mr.</option>';

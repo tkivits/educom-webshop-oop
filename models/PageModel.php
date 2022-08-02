@@ -15,6 +15,13 @@ class PageModel
             $this->page = $_GET['page'];
         }
     }
+    protected function testInput($data)
+    {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+    }
     public function showHeader() 
     {
         echo '<h1 class="header">'.$this->page.'</h1>';
@@ -24,7 +31,7 @@ class PageModel
         $this->showMenuStart();
         $this->showMenuItem('Home');
         $this->showMenuItem('About');
-        //$this->showMenuItem('Contact');
+        $this->showMenuItem('Contact');
         //$this->showMenuItem('Webshop');
         //geen login
         //$this->showMenuItem('Register');
