@@ -35,7 +35,7 @@ class UserModel extends PageModel
         $this->namerr = "Name is required";
       } else { 
         $this->name = Util::testInput($_POST["name"]);
-      if (!preg_match("/^[a-zA-Z-' ]*$/",$this->name)) {
+      if (!preg_match("/^[a-zA-Z-' ]*$/", $this->name)) {
         $this->namerr = "Only letters and spaces are allowed";
         }
       }

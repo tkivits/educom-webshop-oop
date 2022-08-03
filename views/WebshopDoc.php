@@ -22,8 +22,7 @@ class WebshopDoc extends ProductDoc
     protected function showContent()
     {
         try {
-            $products = getAllProducts();
-            while ($product = mysqli_fetch_array($products))
+            while ($product = mysqli_fetch_array($this->model->products))
             {
                 echo '<div class="menu">';
                 $this->showProduct($product['ID'], $product['filename_image'], $product['name'], $product['price']);
@@ -34,7 +33,7 @@ class WebshopDoc extends ProductDoc
                 echo '</div>';
             }
         } catch (Exception $e) {
-            logError($e);
+            Util::logError($e);
             echo 'There seems to be a technical issue. Please try again later.';
         }
     }

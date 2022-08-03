@@ -58,6 +58,11 @@ class PageController
             $this->model->doLogoutUser();
             $this->model->page = 'Home';
             break;
+            case 'Webshop';
+            $this->model = new ShopModel($this->model);
+            $this->model->addToCart();
+            $this->model->page = 'Webshop';
+            break;
         }
     }
     private function showResponse()
@@ -92,6 +97,11 @@ class PageController
             case 'Login';
             include_once "views/LoginDoc.php";
             $view = new LoginDoc($this->model);
+            $view->show();
+            break;
+            case 'Webshop';
+            include_once "views/WebshopDoc.php";
+            $view = new WebshopDoc($this->model);
             $view->show();
             break;
         }

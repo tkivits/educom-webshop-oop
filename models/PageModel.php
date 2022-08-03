@@ -25,7 +25,7 @@ class PageModel
         $this->showMenuItem('Home');
         $this->showMenuItem('About');
         $this->showMenuItem('Contact');
-        //$this->showMenuItem('Webshop');
+        $this->showMenuItem('Webshop');
         if (!isset($_SESSION['login']))
         {
             $this->showMenuItem('Register');
