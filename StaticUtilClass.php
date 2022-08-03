@@ -13,6 +13,11 @@ class Util
     {
         echo "LOG TO SERVER: ".$msg;
     }
+    public static function getGETvar($var)
+    {
+        $variable = $_GET[$var];
+        return $variable;
+    }
 }
 
 ?>

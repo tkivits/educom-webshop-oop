@@ -8,11 +8,10 @@ class PageModel
     }
     public function getRequestedPage()
     {
-        if(!isset($_GET['page'])){
+        $this->page = Util::getGETvar('page');
+        if (!isset($this->page))
+        {
             $this->page = 'Home';
-        }
-        else {
-            $this->page = $_GET['page'];
         }
     }
     public function showHeader() 
