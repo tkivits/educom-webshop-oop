@@ -27,7 +27,6 @@ class ShopModel extends PageModel
                 } catch (Exception $e) {
                     Util::logError($e);
                 }
-                
             }
             if ($_SESSION['cart'][$id] >= 0) {
                 $qty = $_SESSION['cart'][$id];

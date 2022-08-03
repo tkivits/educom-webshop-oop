@@ -2,17 +2,19 @@
 
 class PageModel
 {
+    public $page;
     public function __construct()
     {
         $this->page = $this->getRequestedPage();
     }
     public function getRequestedPage()
     {
-        $this->page = Util::getGETvar('page');
-        if (!isset($this->page))
+        $page = Util::getGETvar('page');
+        if (!isset($page))
         {
-            $this->page = 'Home';
+            $page = 'Home';
         }
+        return $page;
     }
     public function showHeader() 
     {
