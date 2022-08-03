@@ -17,7 +17,7 @@ class CartDoc extends ProductDoc
         echo '<input type="hidden" name="action" value="update">';
         echo '<input class="cartButton" type="submit", value="Update">';
     }
-    function showPlaceOrder() 
+    function showPlaceOrderButton() 
     {
         if (isset($_SESSION['total'])) {
             $total = number_format(array_sum($_SESSION['total']), 2);
@@ -36,8 +36,7 @@ class CartDoc extends ProductDoc
         try {
             $_SESSION['total'] = array();
             $items = array_filter($_SESSION['cart']);
-            $products = getAllProducts();
-            while ($product = mysqli_fetch_array($products))
+            while ($product = mysqli_fetch_array($this->model->products))
             {
             if (array_key_exists($product['ID'], $items)) {
                 $item_total = number_format($_SESSION['cart'][$product['ID']] * $product['price'], 2);
@@ -59,10 +58,10 @@ class CartDoc extends ProductDoc
             }
             }
         } catch (Exception $e) {
-            logError($e);
+            Util::logError($e);
             echo 'There seems to be a technical issue. Please try again later.';
         }
-        $this->showPlaceOrder();
+        $this->showPlaceOrderButton();
     }
 }
 ?>

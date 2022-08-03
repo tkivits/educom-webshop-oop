@@ -63,6 +63,18 @@ class PageController
             $this->model->addToCart();
             $this->model->page = 'Webshop';
             break;
+            case 'Cart';
+            $this->model = new ShopModel($this->model);
+            $this->model->updateCart();
+            if ($this->model->valid)
+            {
+                $this->model->page = 'OrderComplete';
+            } elseif (empty($_SESSION['cart'])){
+                $this->model->page = 'EmptyCart';
+            } else {
+                $this->model->page = 'Cart';
+            }
+            break;
         }
     }
     private function showResponse()
@@ -102,6 +114,21 @@ class PageController
             case 'Webshop';
             include_once "views/WebshopDoc.php";
             $view = new WebshopDoc($this->model);
+            $view->show();
+            break;
+            case 'EmptyCart';
+            include_once "views/EmptyCartDoc.php";
+            $view = new EmptyCartDoc($this->model);
+            $view->show();
+            break;
+            case 'Cart';
+            include_once "views/CartDoc.php";
+            $view = new CartDoc($this->model);
+            $view->show();
+            break;
+            case 'OrderComplete';
+            include_once "views/OrderCompleteDoc.php";
+            $view = new OrderCompleteDoc($this->model);
             $view->show();
             break;
         }

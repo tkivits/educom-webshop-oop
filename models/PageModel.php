@@ -31,7 +31,7 @@ class PageModel
             $this->showMenuItem('Register');
             $this->showMenuItem('Login');
         } else {
-            //$this->showMenuItem('Cart');
+            $this->showMenuItem('Cart');
             $this->showMenuItem('Logout', $_SESSION['name']);
         }
         $this->showMenuEnd();
