@@ -11,7 +11,7 @@ class DetailDoc extends ProductDoc
         echo '<div class="title">'.$name.'</div></li>';
         echo '<div class="price">'.$price.'</div></li>';
     }
-    protected function showCartButton($productid)
+    protected function showCartButton($productid, $container = NULL)
     {
         echo '<form method="post">';
         echo '<input type="hidden" name="CartID", value="'.$productid.'">';

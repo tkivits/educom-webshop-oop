@@ -5,19 +5,29 @@ class CartDoc extends ProductDoc
 {
     protected function showProduct($id, $image, $name, $price) 
     {
-        echo '<a href="?page='.$id.'">';
-        echo '<img class="productimg" src="'.$image.'" alt="'.$name.'"/>';
-        echo '</a>';
-        echo '<div class="title">'.$name.'</div></li>';
-        echo '<div class="price">'.$price.'</div></li>';
+        echo '<div class="cartitems">';
+        echo '<div class="imagecontainer"><a href="?page='.$id.'"><img class="productimg" src="'.$image.'" alt="'.$name.'"/></a></div>';
+        echo '<div class="about">';
+        echo '<div class="itemtitle">'.$name.'</div>';
+        echo '<div class="itemprice">'.$price.'</div>';
+        echo '</div>';
     }
-    protected function showCartButton($productid)
+    protected function showCartButton($productid, $container = NULL)
     {
+        echo '<div class="countcontainer">';
+        echo '<form method="post">';
+        echo '<div><input type="number" class="count" id="amountCart" name="amountCart" value="'.$container.'"></div>';
         echo '<input type="hidden" name="CartID", value="'.$productid.'">';
         echo '<input type="hidden" name="action" value="update">';
         echo '<input class="cartButton" type="submit", value="Update">';
+        echo '</form>';
+        echo '</div>';
     }
-    function showPlaceOrderButton() 
+    private function showItemTotal($total)
+    {
+        echo '<div class="pricetotalcontainer"><div class="priceitemtotal">'.$total.'</div></div>';
+    }
+    private function showPlaceOrderButton() 
     {
         if (isset($_SESSION['total'])) {
             $total = number_format(array_sum($_SESSION['total']), 2);
@@ -38,24 +48,15 @@ class CartDoc extends ProductDoc
             $items = array_filter($_SESSION['cart']);
             while ($product = mysqli_fetch_array($this->model->allproducts))
             {
-            if (array_key_exists($product['ID'], $items)) {
-                $item_total = number_format($_SESSION['cart'][$product['ID']] * $product['price'], 2);
-                echo '<div class="cartitems">';
-                echo '<div class="imagecontainer"><a href="?page='.$product['ID'].'"><img class="productimg" src="'.$product['filename_image'].'" alt="'.$product['name'].'"/></a></div>';
-                echo '<div class="about">';
-                echo '<div class="itemtitle">'.$product['name'].'</div>';
-                echo '<div class="itemprice">'.$product['price'].'</div>';
-                echo '</div>';
-                echo '<div class="countcontainer">';
-                echo '<form method="post">';
-                echo '<div><input type="number" class="count" id="amountCart" name="amountCart" value="'.$_SESSION['cart'][$product['ID']].'"></div>';
-                $this->showCartButton($product['ID']);
-                echo '</form>';
-                echo '</div>';
-                echo '<div class="pricetotalcontainer"><div class="priceitemtotal">'.$item_total.'</div></div>';
-                echo '</div>';
-                array_push($_SESSION['total'], $item_total);
-            }
+                if (array_key_exists($product['ID'], $items)) 
+                {
+                    $item_total = number_format($_SESSION['cart'][$product['ID']] * $product['price'], 2);
+                    $this->showProduct($product['ID'], $product['filename_image'], $product['name'], $product['price']);
+                    $this->showCartButton($product['ID'], $_SESSION['cart'][$product['ID']]);
+                    $this->showItemTotal($item_total);
+                    echo '</div>';
+                    array_push($_SESSION['total'], $item_total);
+                }
             }
         } catch (Exception $e) {
             Util::logError($e);
