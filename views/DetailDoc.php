@@ -19,13 +19,17 @@ class DetailDoc extends ProductDoc
         echo '<input class="cartButton" type="submit", value="Add to cart">';
         echo '</form>';
     }
+    private function showDescription($description)
+    {
+        echo '<div>'.$description.'</div></li>';
+    }
     protected function showContent()
     {
 	    try {
 		    $product = mysqli_fetch_array($this->model->singleproduct);
 		    echo '<div class="menu">';
 		    $this->showProduct($product['ID'], $product['filename_image'], $product['name'], $product['price']);
-		    echo '<div>'.$product['item_description'].'</div></li>';
+		    $this->showDescription($product['item_description']);
 		    if (isset($_SESSION['login'])) 
             {
 			    $this->showCartButton($product['ID']);
