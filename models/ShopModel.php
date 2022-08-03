@@ -6,7 +6,12 @@ class ShopModel extends PageModel
     public function __construct($pagemodel)
     {
         PARENT::__construct($pagemodel);
-        $this->allproducts = getAllProducts();
+        try
+        {
+            $this->allproducts = getAllProducts();
+        } catch (Exception $e) {
+            Util::logError($e);
+        }
     }
     public function addToCart()
     {
@@ -49,7 +54,13 @@ class ShopModel extends PageModel
     }
     public function setSingleProduct()
     {
-        $this->singleproduct = getSingleProduct($this->productID);
+        try
+        {
+            $this->singleproduct = getSingleProduct($this->productID);
+        } catch (Exception $e) {
+            Util::logError($e);
+        }
+        
     }
 }
 ?>

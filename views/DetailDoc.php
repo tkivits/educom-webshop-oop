@@ -25,22 +25,15 @@ class DetailDoc extends ProductDoc
     }
     protected function showContent()
     {
-	    try {
-		    $product = mysqli_fetch_array($this->model->singleproduct);
-		    echo '<div class="menu">';
-		    $this->showProduct($product['ID'], $product['filename_image'], $product['name'], $product['price']);
-		    $this->showDescription($product['item_description']);
-		    if (isset($_SESSION['login'])) 
-            {
-			    $this->showCartButton($product['ID']);
-		    }
-		    echo '</div>';
-	    } 
-        catch (Exception $e) 
+		$product = mysqli_fetch_array($this->model->singleproduct);
+		echo '<div class="menu">';
+		$this->showProduct($product['ID'], $product['filename_image'], $product['name'], $product['price']);
+		$this->showDescription($product['item_description']);
+		if (isset($_SESSION['login'])) 
         {
-		    Util::logError($e);
-		    echo 'There seems to be a technical issue. Please try again later.';
-	    }
+			$this->showCartButton($product['ID']);
+		}
+		echo '</div>';
     }
 }
 ?>

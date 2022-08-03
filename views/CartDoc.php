@@ -43,24 +43,20 @@ class CartDoc extends ProductDoc
     }
     protected function showContent()
     {
-        try {
-            $_SESSION['total'] = array();
-            $items = array_filter($_SESSION['cart']);
-            while ($product = mysqli_fetch_array($this->model->allproducts))
+
+        $_SESSION['total'] = array();
+        $items = array_filter($_SESSION['cart']);
+        while ($product = mysqli_fetch_array($this->model->allproducts))
+        {
+            if (array_key_exists($product['ID'], $items)) 
             {
-                if (array_key_exists($product['ID'], $items)) 
-                {
-                    $item_total = number_format($_SESSION['cart'][$product['ID']] * $product['price'], 2);
-                    $this->showProduct($product['ID'], $product['filename_image'], $product['name'], $product['price']);
-                    $this->showCartButton($product['ID'], $_SESSION['cart'][$product['ID']]);
-                    $this->showItemTotal($item_total);
-                    echo '</div>';
-                    array_push($_SESSION['total'], $item_total);
-                }
+                $item_total = number_format($_SESSION['cart'][$product['ID']] * $product['price'], 2);
+                $this->showProduct($product['ID'], $product['filename_image'], $product['name'], $product['price']);
+                $this->showCartButton($product['ID'], $_SESSION['cart'][$product['ID']]);
+                $this->showItemTotal($item_total);
+                echo '</div>';
+                array_push($_SESSION['total'], $item_total);
             }
-        } catch (Exception $e) {
-            Util::logError($e);
-            echo 'There seems to be a technical issue. Please try again later.';
         }
         $this->showPlaceOrderButton();
     }

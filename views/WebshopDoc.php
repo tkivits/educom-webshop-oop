@@ -21,20 +21,15 @@ class WebshopDoc extends ProductDoc
     }
     protected function showContent()
     {
-        try {
-            while ($product = mysqli_fetch_array($this->model->allproducts))
+        while ($product = mysqli_fetch_array($this->model->allproducts))
+        {
+            echo '<div class="menu">';
+            $this->showProduct($product['ID'], $product['filename_image'], $product['name'], $product['price']);
+            if (isset($_SESSION['login']))
             {
-                echo '<div class="menu">';
-                $this->showProduct($product['ID'], $product['filename_image'], $product['name'], $product['price']);
-                if (isset($_SESSION['login']))
-                {
-                    $this->showCartButton($product['ID']);
-                }
-                echo '</div>';
+                $this->showCartButton($product['ID']);
             }
-        } catch (Exception $e) {
-            Util::logError($e);
-            echo 'There seems to be a technical issue. Please try again later.';
+            echo '</div>';
         }
     }
 }
