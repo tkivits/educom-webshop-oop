@@ -3,9 +3,11 @@
 class PageModel
 {
     public $page;
+    public $header;
     public function __construct()
     {
         $this->page = $this->getRequestedPage();
+        $this->header = $this->setHeader();
     }
     public function getRequestedPage()
     {
@@ -16,9 +18,21 @@ class PageModel
         }
         return $page;
     }
-    public function showHeader() 
+    protected function setHeader()
     {
-        echo '<h1 class="header">'.$this->page.'</h1>';
+        $page = Util::getGETvar('page');
+        if (empty($page)) {
+            $header = 'Home';
+        } elseif ($page == 'Thanks') {
+            $header = 'Contact';
+        } elseif ($page == 'Detail') {
+            $header = 'Webshop';
+        } elseif ($page == 'EmptyCart' || $page == 'Cart' || $page == 'OrderComplete') {
+            $header = 'Shopping cart';
+        } else {
+            $header = $page;
+        }
+        return $header;
     }
     public function createMenu()
     {
@@ -51,10 +65,5 @@ class PageModel
         echo '</u>';
         echo '</div>';
     }
-    public function showFooter() 
-    {
-        echo '<footer class="foot"><p>&copy; 2022 Teun Kivits</p></footer>';
-    }
 }
-
 ?>
