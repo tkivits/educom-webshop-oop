@@ -1,12 +1,12 @@
 <?php
 class ShopModel extends PageModel
 {
-    public $products;
+    public $allproducts;
     public $valid = False;
     public function __construct($pagemodel)
     {
         PARENT::__construct($pagemodel);
-        $this->products = getAllProducts();
+        $this->allproducts = getAllProducts();
     }
     public function addToCart()
     {
@@ -42,6 +42,14 @@ class ShopModel extends PageModel
             unset($_SESSION['cart']);
             $this->valid = True;
         }
+    }
+    public function setProductID()
+    {
+        $this->productID = Util::getGETvar('page');
+    }
+    public function setSingleProduct()
+    {
+        $this->singleproduct = getSingleProduct($this->productID);
     }
 }
 ?>

@@ -63,6 +63,13 @@ class PageController
             $this->model->addToCart();
             $this->model->page = 'Webshop';
             break;
+            case is_numeric($this->model->page);
+            $this->model = new ShopModel($this->model);
+            $this->model->setProductID();
+            $this->model->setSingleProduct();
+            $this->model->addToCart();
+            $this->model->page = 'Detail';
+            break;
             case 'Cart';
             $this->model = new ShopModel($this->model);
             $this->model->updateCart();
@@ -114,6 +121,11 @@ class PageController
             case 'Webshop';
             include_once "views/WebshopDoc.php";
             $view = new WebshopDoc($this->model);
+            $view->show();
+            break;
+            case 'Detail';
+            include_once "views/DetailDoc.php";
+            $view = new DetailDoc($this->model);
             $view->show();
             break;
             case 'EmptyCart';

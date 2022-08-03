@@ -22,7 +22,7 @@ class WebshopDoc extends ProductDoc
     protected function showContent()
     {
         try {
-            while ($product = mysqli_fetch_array($this->model->products))
+            while ($product = mysqli_fetch_array($this->model->allproducts))
             {
                 echo '<div class="menu">';
                 $this->showProduct($product['ID'], $product['filename_image'], $product['name'], $product['price']);

@@ -3,12 +3,6 @@ require_once 'ProductDoc.php';
 require_once 'dataLayer.php';
 class DetailDoc extends ProductDoc 
 {
-    public $productid;
-    public function __construct($page, $productid)
-    {
-        $this->page = $page;
-        $this->id = $productid;
-    }
     protected function showProduct($id, $image, $name, $price) 
     {
         echo '<a href="?page='.$id.'">';
@@ -28,21 +22,19 @@ class DetailDoc extends ProductDoc
     protected function showContent()
     {
 	    try {
-		    $data = getSingleProduct($this->id);
-		    $product = mysqli_fetch_array($data);
+		    $product = mysqli_fetch_array($this->model->singleproduct);
 		    echo '<div class="menu">';
 		    $this->showProduct($product['ID'], $product['filename_image'], $product['name'], $product['price']);
 		    echo '<div>'.$product['item_description'].'</div></li>';
 		    if (isset($_SESSION['login'])) 
             {
 			    $this->showCartButton($product['ID']);
-                addToCart();
 		    }
 		    echo '</div>';
 	    } 
         catch (Exception $e) 
         {
-		    logError($e);
+		    Util::logError($e);
 		    echo 'There seems to be a technical issue. Please try again later.';
 	    }
     }
