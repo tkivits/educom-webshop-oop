@@ -29,12 +29,12 @@ class UserModel extends PageModel
       if(empty($_POST["sal"])) {
         $this->salerr = "Salutation is required";
       } else {
-        $this->sal = Util::testInput($_POST["sal"]);
+        $this->sal = Util::getPOSTvar('sal');
       }
       if(empty($_POST["name"])) {
         $this->namerr = "Name is required";
       } else { 
-        $this->name = Util::testInput($_POST["name"]);
+        $this->name = Util::getPOSTvar('name');
       if (!preg_match("/^[a-zA-Z-' ]*$/", $this->name)) {
         $this->namerr = "Only letters and spaces are allowed";
         }
@@ -42,7 +42,7 @@ class UserModel extends PageModel
       if(empty($_POST["email"])) {
         $this->emailerr = "E-mail is required";
       } else {
-        $this->email = Util::testInput($_POST["email"]);
+        $this->email = Util::getPOSTvar('email');
         if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
           $this->emailerr = "Invalid e-mail";
         }
@@ -50,7 +50,7 @@ class UserModel extends PageModel
       if(empty($_POST["phone"])) {
         $this->phonerr = "Phone number is required";
       } else {
-        $this->phone = Util::testInput($_POST["phone"]);
+        $this->phone = Util::getPOSTvar('phone');
         if (!preg_match("/^0[0-9]{1,3}-{0,1}[0-9]{6,8}$/",$this->phone)) {
           $this->phonerr = "Invalid phone number";
         }
@@ -58,12 +58,12 @@ class UserModel extends PageModel
       if(empty($_POST["compref"])) {
         $this->compreferr = "Communication preference is required";
       } else {
-        $this->compref = Util::testInput($_POST["compref"]);
+        $this->compref = Util::getPOSTvar('compref');
       }
       if(empty($_POST["mess"])) {
         $this->messerr = "A message is required";
       } else {
-        $this->mess = Util::testInput($_POST["mess"]);
+        $this->mess = Util::getPOSTvar('mess');
       }
       if(empty($this->salerr) && empty($this->namerr) && empty($this->emailerr) && empty($this->phonerr) && empty($this->compreferr) && empty($this->messerr)) {
         $this->valid = True;
@@ -73,10 +73,10 @@ class UserModel extends PageModel
   public function validateRegistration() 
   {
     if($_SERVER["REQUEST_METHOD"] == "POST") {
-      $this->name = Util::testInput($_POST['name']);
-      $this->email = Util::testInput($_POST['email']);
-      $this->pw = Util::testInput($_POST['pw']);
-      $this->pwrepeat = Util::testInput($_POST['pwrepeat']);
+      $this->name = Util::getPOSTvar('name');
+      $this->email = Util::getPOSTvar('email');
+      $this->pw = Util::getPOSTvar('pw');
+      $this->pwrepeat = Util::getPOSTvar('pwrepeat');
       if (empty($_POST["name"])) {
         $this->namerr = "Name is required";
       } elseif (!preg_match("/^[a-zA-Z-' ]*$/", $this->name)) {
@@ -112,8 +112,8 @@ class UserModel extends PageModel
   public function validateUser() 
   {
     if($_SERVER["REQUEST_METHOD"] == "POST") {
-      $this->email = Util::testInput($_POST['email']);
-      $this->pw = Util::testInput($_POST['pw']);
+      $this->email = Util::getPOSTvar('email');
+      $this->pw = Util::getPOSTvar('pw');
       if (empty($this->email)) {
         $this->emailerr = "E-mail is required";
       } elseif (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
