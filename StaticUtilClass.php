@@ -4,7 +4,12 @@ class Util
 {
     public static function getGETvar($var)
     {
-        $variable = $_GET[$var];
+        if (empty($_GET[$var]))
+        {
+            $variable = NULL;
+        } else {
+            $variable = $_GET[$var];
+        }
         return $variable;
     }
     public static function getPOSTvar($var)
