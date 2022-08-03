@@ -2,10 +2,12 @@
 class ShopModel extends PageModel
 {
     public $allproducts;
+    public $itemsincart;
     public $valid = False;
     public function __construct($pagemodel)
     {
         PARENT::__construct($pagemodel);
+        $this->itemsincart = $this->getItemsInCart();
         try
         {
             $this->allproducts = getAllProducts();
@@ -17,10 +19,10 @@ class ShopModel extends PageModel
     {
         if(isset($_POST['action']) && $_POST['action'] == 'AddToCart'){
             $id = Util::getPOSTvar('CartID');
-            if (!isset($_SESSION['cart'])) {
+            if (empty($_SESSION['cart'])) {
                 try {
                     $_SESSION['cart'] = array();
-                    while ($row = mysqli_fetch_array($this->products)) {
+                    while ($row = mysqli_fetch_array($this->allproducts)) {
                         $single_id = $row['ID'];
                         $_SESSION['cart'][$single_id] = 0;
                     }
@@ -46,6 +48,15 @@ class ShopModel extends PageModel
             unset($_SESSION['cart']);
             $this->valid = True;
         }
+    }
+    private function getItemsInCart()
+    {
+        $items = array();
+        if (!empty($_SESSION['cart']))
+        {
+            $items = array_filter($_SESSION['cart']);
+        }
+        return $items;
     }
     public function setProductID()
     {
