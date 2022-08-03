@@ -14,10 +14,15 @@ class Util
     }
     public static function getPOSTvar($var)
     {
-        $variable = $_POST[$var];
-        $variable = trim($variable);
-        $variable = stripslashes($variable);
-        $variable = htmlspecialchars($variable);
+        if (empty($_POST[$var]))
+        {
+            $variable = NULL;
+        } else {
+            $variable = $_POST[$var];
+            $variable = trim($variable);
+            $variable = stripslashes($variable);
+            $variable = htmlspecialchars($variable);
+        }
         return $variable;
     }
     public static function logError($msg) 
