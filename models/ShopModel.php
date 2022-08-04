@@ -39,14 +39,19 @@ class ShopModel extends PageModel
     }
     public function updateCart() 
     {
-        if(isset($_POST['CartID']) && $_POST['action'] == 'update') {
+        $action = Util::getPOSTvar('action');
+        switch ($action)
+        {
+            case 'update';
             $item_id = Util::getPOSTvar('CartID');
             $amount = Util::getPOSTvar('amountCart');
             $_SESSION['cart'][$item_id] = $amount;
-        } elseif(isset($_POST['placeOrder']) && $_POST['action'] == 'placeOrder') {
+            break;
+            case 'placeOrder';
             registerOrder();
             unset($_SESSION['cart']);
             $this->valid = True;
+            break;
         }
     }
     private function getItemsInCart()

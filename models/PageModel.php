@@ -22,17 +22,33 @@ class PageModel
     }
     protected function setHeader()
     {
-        $page = Util::getGETvar('page');
-        if (empty($page) || $page == 'Login' || $page == 'Logout') {
+        $header = Util::getGETvar('page');
+        switch($header)
+        {
+            case empty($header);
             $header = 'Home';
-        } elseif ($page == 'Thanks') {
+            break;
+            case 'Login';
+            $header = 'Home';
+            break;
+            case 'Logout';
+            $header = 'Home';
+            break;
+            case 'Thanks';
             $header = 'Contact';
-        } elseif ($page == 'Detail') {
+            break;
+            case 'Detail';
             $header = 'Webshop';
-        } elseif ($page == 'EmptyCart' || $page == 'Cart' || $page == 'OrderComplete') {
+            break;
+            case 'EmptyCart';
             $header = 'Shopping cart';
-        } else {
-            $header = $page;
+            break;
+            case 'Cart';
+            $header = 'Shopping cart';
+            break;
+            case 'OrderComplete';
+            $header = 'Shopping cart';
+            break;
         }
         return $header;
     }
