@@ -60,7 +60,7 @@ class PageController
             break;
             case 'Logout';
             $this->model = new UserModel($this->model);
-            $this->model->doLogoutUser();
+            $this->model->Logout();
             $this->model->page = 'Home';
             break;
             case 'Webshop';

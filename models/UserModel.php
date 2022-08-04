@@ -151,7 +151,11 @@ class UserModel extends PageModel
     $_SESSION['name'] = $this->user['name'];
     $_SESSION['login'] = True;
   }
-  public function doLogoutUser()
+  public function logout()
+  {
+    $this->doLogoutUser();
+  }
+  private function doLogoutUser()
   {
     session_unset();
     session_destroy();
