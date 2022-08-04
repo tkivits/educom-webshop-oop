@@ -8,6 +8,10 @@ class Util
         {
             $variable = NULL;
         } else {
+            $variable = $_POST[$var];
+            $variable = trim($variable);
+            $variable = stripslashes($variable);
+            $variable = htmlspecialchars($variable);
             $variable = $_GET[$var];
         }
         return $variable;
