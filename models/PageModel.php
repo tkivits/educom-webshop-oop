@@ -48,7 +48,7 @@ class PageModel
             case 'Thanks';
                 $header = 'Contact';
                 break;
-            case 'Detail';
+            case is_numeric($header);
                 $header = 'Webshop';
                 break;
             case 'EmptyCart';

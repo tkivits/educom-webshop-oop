@@ -69,10 +69,15 @@ class PageController
                 $this->model->page = 'Webshop';
                 break;
             case is_numeric($this->model->page);
-                $this->model = new ShopModel($this->model);
-                $this->model->setProductID();
-                $this->model->setSingleProduct();
-                $this->model->addToCart();
+                if ($this->model->page > 5)
+                {
+                    $this->model->genericerr = 'Something went wrong, please try again later!';
+                } else {
+                    $this->model = new ShopModel($this->model);
+                    $this->model->setProductID();
+                    $this->model->setSingleProduct();
+                    $this->model->addToCart();
+                }
                 $this->model->page = 'Detail';
                 break;
             case 'Cart';
