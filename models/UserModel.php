@@ -140,11 +140,15 @@ class UserModel extends PageModel
       }
     }
   }
-  public function doLoginUser($id, $email, $name)
+  public function login()
   {
-    $_SESSION['user_id'] = $id;
-    $_SESSION['email'] = $email;
-    $_SESSION['name'] = $name;
+    $this->doLoginUser();
+  }
+  private function doLoginUser()
+  {
+    $_SESSION['user_id'] = $this->user['ID'];
+    $_SESSION['email'] = $this->user['email'];
+    $_SESSION['name'] = $this->user['name'];
     $_SESSION['login'] = True;
   }
   public function doLogoutUser()

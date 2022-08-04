@@ -52,7 +52,7 @@ class PageController
             $this->model->validateUser();
             if ($this->model->valid)
             {
-                $this->model->doLoginUser($this->model->user['ID'], $this->model->user['email'], $this->model->user['name']);
+                $this->model->login();
                 $this->model->page = 'Home';
             } else {
                 $this->model->page = 'Login';
