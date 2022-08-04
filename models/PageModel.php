@@ -5,11 +5,21 @@ class PageModel
     public $page;
     public $header;
     public $menuitems;
-    public function __construct()
+    public $menuitemslogin;
+    public function __construct($copy)
     {
-        $this->page = $this->getRequestedPage();
-        $this->header = $this->setHeader();
-        $this->menuitems = $this->createMenuItems();
+        if (empty($copy))
+        {
+            $this->page = $this->getRequestedPage();
+            $this->header = $this->setHeader();
+            $this->menuitems = $this->createMenuItems();
+            $this->menuitemslogin = $this->createMenuItemsLogin();
+        } else {
+            $this->page = $copy->page;
+            $this->header = $copy->header;
+            $this->menuitems = $copy->menuitems;
+            $this->menuitemslogin = $copy->menuitemslogin;
+        }
     }
     public function getRequestedPage()
     {
@@ -54,12 +64,12 @@ class PageModel
     }
     private function createMenuItems()
     {
-        $menuitems = array('Home', 'About', 'Contact', 'Webshop');
-        if (!isset($_SESSION['login'])) {
-            array_push($menuitems, 'Register', 'Login');
-        } else {
-            array_push($menuitems, 'Cart', 'Logout');
-        }
+        $menuitems = array('Home', 'About', 'Contact', 'Webshop', 'Register', 'Login');
+        return $menuitems;
+    }
+    private function createMenuItemsLogin()
+    {
+        $menuitems = array('Home', 'About', 'Contact', 'Webshop', 'Cart', 'Logout');
         return $menuitems;
     }
 }

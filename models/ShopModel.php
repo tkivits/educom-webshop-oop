@@ -4,15 +4,21 @@ class ShopModel extends PageModel
     public $allproducts;
     public $itemsincart;
     public $valid = False;
-    public function __construct($pagemodel)
+    public function __construct($copy)
     {
-        PARENT::__construct($pagemodel);
-        $this->itemsincart = $this->getItemsInCart();
-        try
+        PARENT::__construct($copy);
+        if (empty($copy->itemsincart) || empty($copy->allproducts))
         {
-            $this->allproducts = getAllProducts();
-        } catch (Exception $e) {
-            Util::logError($e);
+            $this->itemsincart = $this->getItemsInCart();
+            try
+            {
+                $this->allproducts = getAllProducts();
+            } catch (Exception $e) {
+                Util::logError($e);
+            }
+        } else {
+            $this->itemsincart = $copy->itemsincart;
+            $this->allproducts = $copy->allproducts;
         }
     }
     public function addToCart()

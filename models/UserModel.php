@@ -19,9 +19,9 @@ class UserModel extends PageModel
   public $pwrepeaterr = '';
   public $user = array();
   public $valid = False;
-  public function __construct($pageModel)
+  public function __construct($copy)
   {
-      PARENT::__construct($pageModel);
+      PARENT::__construct($copy);
   }
   public function validateContactForm() 
   {

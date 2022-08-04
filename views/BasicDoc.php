@@ -36,9 +36,16 @@ class BasicDoc extends HtmlDoc
     private function createMenu()
     {
         $this->showMenuStart();
-        foreach ($this->model->menuitems as $menuitem)
-        {
-            $this->showMenuItem($menuitem);
+        if (!isset($_SESSION['login'])) {
+            foreach ($this->model->menuitems as $menuitem)
+            {
+                $this->showMenuItem($menuitem);
+            }
+        } else {
+            foreach ($this->model->menuitemslogin as $menuitem)
+            {
+                $this->showMenuItem($menuitem);
+            } 
         }
         $this->showMenuEnd();
     }
