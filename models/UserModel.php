@@ -95,16 +95,23 @@ class UserModel extends PageModel
       } elseif ($this->pw !== $this->pwrepeat) {
         $this->pwrepeaterr = "Entered passwords do not match";
       }
-      $user = findUserByEmail($this->email);
-      if (isset($user['email'])) {
-        $this->emailerr = "E-mail already exists";
+      try {
+        $user = findUserByEmail($this->email);
+        if (isset($user['email']))
+        {
+          $this->emailerr = 'E-mail already exists';
+        }
+      } catch (Exception $e) {
+        Util::logError($e);
+        $this->genericerr = 'Something went wrong, please try again later!';
       }
-      if (empty($this->namerr) && empty($this->emailerr) && empty($this->pwerr) && empty($this->pwrepeaterr)) {
+      if (empty($this->genericerr) && empty($this->namerr) && empty($this->emailerr) && empty($this->pwerr) && empty($this->pwrepeaterr)) {
         try {
           registerNewUser($this->email, $this->name, $this->pw);
           $this->valid = True;
         } catch (Exception $e) {
           Util::logError($e);
+          $this->genericerr = 'Something went wrong, please try again later!';
         }
       }
     }
@@ -133,9 +140,10 @@ class UserModel extends PageModel
           }
         } catch (Exception $e) {
           Util::logError($e);
+          $this->genericerr = 'Something went wrong, please try again later!';
         }
       }
-      if(empty($this->emailerr) && empty($this->pwerr)) {
+      if(empty($this->genericerr) && empty($this->emailerr) && empty($this->pwerr)) {
         $this->valid = True;
       }
     }

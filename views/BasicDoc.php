@@ -53,6 +53,10 @@ class BasicDoc extends HtmlDoc
     {
         $this->createMenu();
     }
+    protected function showGenericErr() 
+    {
+        echo $this->model->genericerr;
+    }
     protected function showFooter() 
     {
         echo '<footer class="foot"><p>&copy; 2022 Teun Kivits</p></footer>';
@@ -65,6 +69,7 @@ class BasicDoc extends HtmlDoc
     {
         $this->showHeader();
         $this->showMenu();
+        $this->showGenericErr();
         $this->showContent();
         $this->showFooter();
     }

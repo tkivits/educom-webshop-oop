@@ -6,6 +6,7 @@ class PageModel
     public $header;
     public $menuitems;
     public $menuitemslogin;
+    public $genericerr = '';
     public function __construct($copy)
     {
         if (empty($copy))
@@ -36,29 +37,29 @@ class PageModel
         switch($header)
         {
             case empty($header);
-            $header = 'Home';
-            break;
+                $header = 'Home';
+                break;
             case 'Login';
-            $header = 'Home';
-            break;
+                $header = 'Home';
+                break;
             case 'Logout';
-            $header = 'Home';
-            break;
+                $header = 'Home';
+                break;
             case 'Thanks';
-            $header = 'Contact';
-            break;
+                $header = 'Contact';
+                break;
             case 'Detail';
-            $header = 'Webshop';
-            break;
+                $header = 'Webshop';
+                break;
             case 'EmptyCart';
-            $header = 'Shopping cart';
-            break;
+                $header = 'Shopping cart';
+                break;
             case 'Cart';
-            $header = 'Shopping cart';
-            break;
+                $header = 'Shopping cart';
+                break;
             case 'OrderComplete';
-            $header = 'Shopping cart';
-            break;
+                $header = 'Shopping cart';
+                break;
         }
         return $header;
     }

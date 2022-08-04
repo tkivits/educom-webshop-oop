@@ -15,6 +15,7 @@ class ShopModel extends PageModel
                 $this->allproducts = getAllProducts();
             } catch (Exception $e) {
                 Util::logError($e);
+                $this->genericerr = 'Something went wrong, please try again later!';
             }
         } else {
             $this->itemsincart = $copy->itemsincart;
@@ -34,6 +35,7 @@ class ShopModel extends PageModel
                     }
                 } catch (Exception $e) {
                     Util::logError($e);
+                    $this->genericerr = 'Something went wrong, please try again later!';
                 }
             }
             if ($_SESSION['cart'][$id] >= 0) {
@@ -49,15 +51,22 @@ class ShopModel extends PageModel
         switch ($action)
         {
             case 'update';
-            $item_id = Util::getPOSTvar('CartID');
-            $amount = Util::getPOSTvar('amountCart');
-            $_SESSION['cart'][$item_id] = $amount;
-            break;
+                $item_id = Util::getPOSTvar('CartID');
+                $amount = Util::getPOSTvar('amountCart');
+                $_SESSION['cart'][$item_id] = $amount;
+                break;
             case 'placeOrder';
-            registerOrder();
-            unset($_SESSION['cart']);
-            $this->valid = True;
-            break;
+                try {
+                    registerOrder();
+                } catch (Exception $e) {
+                    Util::logError($e);
+                    $this->genericerr = 'Something went wrong, please try again later!';
+                }
+                if (empty($this->genericerr)) {
+                    unset($_SESSION['cart']);
+                    $this->valid = True;
+                }
+                break;
         }
     }
     private function getItemsInCart()
@@ -80,6 +89,7 @@ class ShopModel extends PageModel
             $this->singleproduct = getSingleProduct($this->productID);
         } catch (Exception $e) {
             Util::logError($e);
+            $this->genericerr = 'Something went wrong, please try again later!';
         }
         
     }
