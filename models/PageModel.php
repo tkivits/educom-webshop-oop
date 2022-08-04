@@ -21,7 +21,7 @@ class PageModel
     protected function setHeader()
     {
         $page = Util::getGETvar('page');
-        if (empty($page)) {
+        if (empty($page) || $page == 'Logout') {
             $header = 'Home';
         } elseif ($page == 'Thanks') {
             $header = 'Contact';
