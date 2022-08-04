@@ -12,9 +12,39 @@ class BasicDoc extends HtmlDoc
     {
         echo '<h1 class="header">'.$this->model->header.'</h1>';
     }
+    protected function showMenuStart()
+    {
+        echo '<div>';
+        echo '<ul class="menu">';
+    }
+    protected function showMenuItem($name)
+    {
+        switch($name)
+        {
+            case 'Logout';
+            echo '<li><a href="?page='.$name.'">'.$name.' '.$_SESSION['name'].'</a></li>';
+            break;
+            default;
+            echo '<li><a href="?page='.$name.'">'.$name.'</a></li>';
+        }
+    }
+    protected function showMenuEnd()
+    {
+        echo '</u>';
+        echo '</div>';
+    }
+    private function createMenu()
+    {
+        $this->showMenuStart();
+        foreach ($this->model->menuitems as $menuitem)
+        {
+            $this->showMenuItem($menuitem);
+        }
+        $this->showMenuEnd();
+    }
     protected function showMenu()
     {
-        $this->model->createMenu();
+        $this->createMenu();
     }
     protected function showFooter() 
     {

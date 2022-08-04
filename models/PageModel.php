@@ -4,10 +4,12 @@ class PageModel
 {
     public $page;
     public $header;
+    public $menuitems;
     public function __construct()
     {
         $this->page = $this->getRequestedPage();
         $this->header = $this->setHeader();
+        $this->menuitems = $this->createMenuItems();
     }
     public function getRequestedPage()
     {
@@ -21,7 +23,7 @@ class PageModel
     protected function setHeader()
     {
         $page = Util::getGETvar('page');
-        if (empty($page) || $page == 'Logout') {
+        if (empty($page) || $page == 'Login' || $page == 'Logout') {
             $header = 'Home';
         } elseif ($page == 'Thanks') {
             $header = 'Contact';
@@ -34,36 +36,15 @@ class PageModel
         }
         return $header;
     }
-    public function createMenu()
+    private function createMenuItems()
     {
-        $this->showMenuStart();
-        $this->showMenuItem('Home');
-        $this->showMenuItem('About');
-        $this->showMenuItem('Contact');
-        $this->showMenuItem('Webshop');
-        if (!isset($_SESSION['login']))
-        {
-            $this->showMenuItem('Register');
-            $this->showMenuItem('Login');
+        $menuitems = array('Home', 'About', 'Contact', 'Webshop');
+        if (!isset($_SESSION['login'])) {
+            array_push($menuitems, 'Register', 'Login');
         } else {
-            $this->showMenuItem('Cart');
-            $this->showMenuItem('Logout', $_SESSION['name']);
+            array_push($menuitems, 'Cart', 'Logout');
         }
-        $this->showMenuEnd();
-    }
-    private function showMenuStart()
-    {
-        echo '<div>';
-        echo '<ul class="menu">';
-    }
-    private function showMenuItem($name, $optional = NULL)
-    {
-        echo '<li><a href="?page='.$name.'">'.$name.' '.$optional.'</a></li>';
-    }
-    private function showMenuEnd()
-    {
-        echo '</u>';
-        echo '</div>';
+        return $menuitems;
     }
 }
 ?>

@@ -53,6 +53,7 @@ class PageController
             if ($this->model->valid)
             {
                 $this->model->login();
+                $this->model = new PageModel($this->model);
                 $this->model->page = 'Home';
             } else {
                 $this->model->page = 'Login';
@@ -61,6 +62,7 @@ class PageController
             case 'Logout';
             $this->model = new UserModel($this->model);
             $this->model->Logout();
+            $this->model = new PageModel($this->model);
             $this->model->page = 'Home';
             break;
             case 'Webshop';
