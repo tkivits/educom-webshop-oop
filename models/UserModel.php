@@ -19,9 +19,10 @@ class UserModel extends PageModel
   public $pwrepeaterr = '';
   public $user = array();
   public $valid = False;
-  public function __construct($copy)
+  public function __construct($copy, $userCrud)
   {
       PARENT::__construct($copy);
+      $this->crud = $userCrud;
   }
   public function validateContactForm() 
   {
@@ -96,20 +97,20 @@ class UserModel extends PageModel
         $this->pwrepeaterr = "Entered passwords do not match";
       }
       try {
-        $user = findUserByEmail($this->email);
+        $user = $this->crud->readUserByEmail($this->email);
         if (isset($user['email']))
         {
           $this->emailerr = 'E-mail already exists';
         }
-      } catch (Exception $e) {
+      } catch (PDOException $e) {
         Util::logError($e);
         $this->genericerr = 'Something went wrong, please try again later!';
       }
       if (empty($this->genericerr) && empty($this->namerr) && empty($this->emailerr) && empty($this->pwerr) && empty($this->pwrepeaterr)) {
         try {
-          registerNewUser($this->email, $this->name, $this->pw);
+          $this->crud->createNewUser($this->email, $this->name, $this->pw);
           $this->valid = True;
-        } catch (Exception $e) {
+        } catch (PDOException $e) {
           Util::logError($e);
           $this->genericerr = 'Something went wrong, please try again later!';
         }
@@ -131,14 +132,14 @@ class UserModel extends PageModel
       }
       if(empty($this->emailerr) && empty($this->pwerr)) {
         try {
-          $this->user = findUserByEmail($this->email);
+          $this->user = $this->crud->readUserByEmail($this->email);
           if (empty($this->user) || $this->user['email'] !== $this->email) {
             $this->emailerr= "Unknown e-mail";
           }
           if (empty($this->user) || $this->user['password'] !== $this->pw) {
             $this->pwerr = "E-mail doesn't match password";
           }
-        } catch (Exception $e) {
+        } catch (PDOException $e) {
           Util::logError($e);
           $this->genericerr = 'Something went wrong, please try again later!';
         }
