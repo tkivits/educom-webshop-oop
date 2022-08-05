@@ -7,7 +7,8 @@ class PageModel
     public $menuitems;
     public $menuitemslogin;
     public $genericerr = '';
-    public function __construct($copy)
+    public $crud;
+    public function __construct($copy, $crud)
     {
         if (empty($copy))
         {
@@ -21,6 +22,7 @@ class PageModel
             $this->menuitems = $copy->menuitems;
             $this->menuitemslogin = $copy->menuitemslogin;
         }
+        $this->crud = $crud;
     }
     public function getRequestedPage()
     {
@@ -36,7 +38,7 @@ class PageModel
         $header = Util::getGETvar('page');
         switch($header)
         {
-            case empty($header);
+            case null;
                 $header = 'Home';
                 break;
             case 'Login';

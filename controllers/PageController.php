@@ -1,17 +1,17 @@
 <?php
-require_once('models/PageModel.php');
-require_once('models/UserModel.php');
-require_once('models/ShopModel.php');
-require_once('StaticUtilClass.php');
-require_once('dataLayer.php');
+require_once 'models/UserModel.php';
+require_once 'models/ShopModel.php';
+require_once 'UserCrud.php';
+require_once 'StaticUtilClass.php';
+require_once 'dataLayer.php';
 
 class PageController
 {
     private $model;
 
-    public function __construct()
+    public function __construct($model)
     {
-        $this->model = new PageModel($this->model);
+        $this->model = $model;
     }
     public function handleRequest()
     {
@@ -28,7 +28,8 @@ class PageController
         switch($this->model->page)
         {
             case 'Contact';
-                $this->model = new UserModel($this->model);
+                $this->model->crud = new UserCrud($this->model->crud);
+                $this->model = new UserModel($this->model, $this->model->crud);
                 $this->model->validateContactForm();
                 if ($this->model->valid)
                 {
@@ -38,7 +39,8 @@ class PageController
                 }
                 break;
             case 'Register';
-                $this->model = new UserModel($this->model);
+                $this->model->crud = new UserCrud($this->model->crud);
+                $this->model = new UserModel($this->model, $this->model->crud);
                 $this->model->validateRegistration();
                 if ($this->model->valid)
                 {
@@ -48,7 +50,8 @@ class PageController
                 }
                 break;
             case 'Login';
-                $this->model = new UserModel($this->model);
+                $this->model->crud = new UserCrud($this->model->crud);
+                $this->model = new UserModel($this->model, $this->model->crud);
                 $this->model->validateUser();
                 if ($this->model->valid)
                 {
@@ -59,7 +62,8 @@ class PageController
                 }
                 break;
             case 'Logout';
-                $this->model = new UserModel($this->model);
+                $this->model->crud = new UserCrud($this->model->crud);
+                $this->model = new UserModel($this->model, $this->model->crud);
                 $this->model->Logout();
                 $this->model->page = 'Home';
                 break;

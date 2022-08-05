@@ -1,4 +1,5 @@
 <?php
+require_once 'PageModel.php';
 class UserModel extends PageModel
 {
   public $sal = '';
@@ -21,8 +22,7 @@ class UserModel extends PageModel
   public $valid = False;
   public function __construct($copy, $userCrud)
   {
-      PARENT::__construct($copy);
-      $this->crud = $userCrud;
+      PARENT::__construct($copy, $userCrud);
   }
   public function validateContactForm() 
   {
@@ -97,7 +97,7 @@ class UserModel extends PageModel
         $this->pwrepeaterr = "Entered passwords do not match";
       }
       try {
-        $user = $this->crud->readUserByEmail($this->email);
+        $user = (array)$this->crud->readUserByEmail($this->email);
         if (isset($user['email']))
         {
           $this->emailerr = 'E-mail already exists';
@@ -132,8 +132,8 @@ class UserModel extends PageModel
       }
       if(empty($this->emailerr) && empty($this->pwerr)) {
         try {
-          $this->user = $this->crud->readUserByEmail($this->email);
-          if (empty($this->user) || $this->user['email'] !== $this->email) {
+          $this->user = (array) $this->crud->readUserByEmail($this->email);
+          if ($this->user['email'] !== $this->email) {
             $this->emailerr= "Unknown e-mail";
           }
           if (empty($this->user) || $this->user['password'] !== $this->pw) {

@@ -6,7 +6,7 @@ class Util
     {
         if (empty($_GET[$var]))
         {
-            $variable = NULL;
+            $variable = null;
         } else {
             $variable = $_GET[$var];
             $variable = trim($variable);
@@ -20,7 +20,7 @@ class Util
     {
         if (empty($_POST[$var]))
         {
-            $variable = NULL;
+            $variable = null;
         } else {
             $variable = $_POST[$var];
             $variable = trim($variable);

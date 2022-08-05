@@ -25,14 +25,10 @@ class UserCrud
     {
         $table = 'users';
         $row = 'email';
-        try {
-            $result = $this->crud->readOneRow($table, $row, $email);
-            if (!$result)
-            {
-                throw new Exception("Failed to read user by email");
-            }
-        } catch (PDOException $e) {
-            Util::logError($e);
+        $result = $this->crud->readOneRow($table, $row, $email);
+        if (!$result)
+        {
+            $result = array('email'=>'','password'=>'');
         }
         return $result;
     }
