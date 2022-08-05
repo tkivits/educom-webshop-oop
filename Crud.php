@@ -14,17 +14,12 @@ class Crud
         $this->pdo = new PDO($this->connstring, $this->dbuser, $this->dbpassword);
         $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
-    public function createUserRow($email, $name, $pw)
+    public function createUserRow($array)
     {
         $sql = 'INSERT INTO users (email, name, password) VALUES (:email, :name, :pw)';
         $stmt = $this->pdo->prepare($sql);
-        $stmt->bindValue(':email', $email);
-        $stmt->bindValue(':name', $name);
-        $stmt->bindValue(':pw', $pw);
         $stmt->setFetchMode(PDO::FETCH_OBJ);
-        $stmt->execute();
-        // Of met array:
-        // $stmt->execute(array(':email' => $email, ':name' => $name, ':pw' => $pw));
+        $stmt->execute($array);
         return $this->pdo->lastInsertId();
     }
     public function readOneRow($table, $row, $value)
