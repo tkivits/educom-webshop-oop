@@ -26,6 +26,9 @@ class Crud
         $stmt->setFetchMode(PDO::FETCH_OBJ);
         $stmt->execute($array);
         if (!$this->pdo->lastInsertId())
+        {
+            throw new Exception('Failed to register new user.');
+        }
         return $this->pdo->lastInsertId();
     }
     public function readOneRow($table, $row, $value)
