@@ -11,8 +11,13 @@ class Crud
         $this->connstring = 'mysql:host=localhost;dbname=teuns_webshop';
         $this->dbuser = 'WebShopUser';
         $this->dbpassword = '1VyldCNbXjpb';
-        $this->pdo = new PDO($this->connstring, $this->dbuser, $this->dbpassword);
-        $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        try {
+            $this->pdo = new PDO($this->connstring, $this->dbuser, $this->dbpassword);
+            $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        } catch (PDOException $e) {
+            echo 'Connection failed: '.$e->getMessage();
+        }
+        
     }
     public function createUserRow($array)
     {
@@ -20,6 +25,7 @@ class Crud
         $stmt = $this->pdo->prepare($sql);
         $stmt->setFetchMode(PDO::FETCH_OBJ);
         $stmt->execute($array);
+        if (!$this->pdo->lastInsertId())
         return $this->pdo->lastInsertId();
     }
     public function readOneRow($table, $row, $value)
