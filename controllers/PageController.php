@@ -2,6 +2,7 @@
 require_once 'models/UserModel.php';
 require_once 'models/ShopModel.php';
 require_once 'UserCrud.php';
+require_once 'ShopCrud.php';
 require_once 'StaticUtilClass.php';
 require_once 'dataLayer.php';
 
@@ -68,7 +69,8 @@ class PageController
                 $this->model->page = 'Home';
                 break;
             case 'Webshop';
-                $this->model = new ShopModel($this->model);
+                $this->model->crud = new ShopCrud($this->model->crud);
+                $this->model = new ShopModel($this->model, $this->model->crud);
                 $this->model->addToCart();
                 $this->model->page = 'Webshop';
                 break;
@@ -77,7 +79,8 @@ class PageController
                 {
                     $this->model->genericerr = 'Something went wrong, please try again later!';
                 } else {
-                    $this->model = new ShopModel($this->model);
+                    $this->model->crud = new ShopCrud($this->model->crud);
+                    $this->model = new ShopModel($this->model, $this->model->crud);
                     $this->model->setProductID();
                     $this->model->setSingleProduct();
                     $this->model->addToCart();
@@ -85,7 +88,8 @@ class PageController
                 $this->model->page = 'Detail';
                 break;
             case 'Cart';
-                $this->model = new ShopModel($this->model);
+                $this->model->crud = new ShopCrud($this->model->crud);
+                $this->model = new ShopModel($this->model, $this->model->crud);
                 $this->model->updateCart();
                 if ($this->model->valid)
                 {
