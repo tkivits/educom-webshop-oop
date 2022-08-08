@@ -25,13 +25,12 @@ class DetailDoc extends ProductDoc
     }
     protected function showContent()
     {
-		$product = mysqli_fetch_array($this->model->singleproduct);
 		echo '<div class="menu">';
-		$this->showProduct($product['ID'], $product['filename_image'], $product['name'], $product['price']);
-		$this->showDescription($product['item_description']);
+		$this->showProduct($this->model->singleproduct['ID'], $this->model->singleproduct['filename_image'], $this->model->singleproduct['name'], $this->model->singleproduct['price']);
+		$this->showDescription($this->model->singleproduct['item_description']);
 		if (isset($_SESSION['login'])) 
         {
-			$this->showCartButton($product['ID']);
+			$this->showCartButton($this->model->singleproduct['ID']);
 		}
 		echo '</div>';
     }
