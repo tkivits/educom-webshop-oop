@@ -20,7 +20,7 @@ class ShopCrud
         {
             throw new Exception($this->genericException);
         }
-        $result = $this->crud->createOrderItemRow($order_id, $items);
+        $result = $this->crud->createOrderItemsRow($order_id, $items);
         if (!$result)
         {
             throw new Exception($this->genericException);

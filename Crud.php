@@ -54,7 +54,7 @@ class Crud
             $stmt->bindValue(':product_id', $product_id);
             $stmt->bindValue(':qty', $qty);
             $stmt->execute();
-            if (!this->pdo->lastInsertId())
+            if (!$this->pdo->lastInsertId())
             {
                 throw new Exception('Failed to register order.');
             }
