@@ -46,8 +46,9 @@ class CartDoc extends ProductDoc
 
         $_SESSION['total'] = array();
         $items = array_filter($_SESSION['cart']);
-        while ($product = mysqli_fetch_array($this->model->allproducts))
+        foreach ($this->model->allproducts as $product)
         {
+            $product = (array)$product;
             if (array_key_exists($product['ID'], $items)) 
             {
                 $item_total = number_format($_SESSION['cart'][$product['ID']] * $product['price'], 2);
