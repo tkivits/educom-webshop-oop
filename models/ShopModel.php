@@ -4,15 +4,15 @@ class ShopModel extends PageModel
     public $allproducts;
     public $itemsincart;
     public $valid = False;
-    public function __construct($copy)
+    public function __construct($copy, $shopCrud)
     {
-        PARENT::__construct($copy);
+        PARENT::__construct($copy, $shopCrud);
         if (empty($copy->itemsincart) || empty($copy->allproducts))
         {
             $this->itemsincart = $this->getItemsInCart();
             try
             {
-                $this->allproducts = getAllProducts();
+                $this->allproducts = (array)$this->crud->readAllProducts();
             } catch (Exception $e) {
                 Util::logError($e);
                 $this->genericerr = 'Something went wrong, please try again later!';
@@ -27,15 +27,11 @@ class ShopModel extends PageModel
         if(isset($_POST['action']) && $_POST['action'] == 'AddToCart'){
             $id = Util::getPOSTvar('CartID');
             if (empty($_SESSION['cart'])) {
-                try {
-                    $_SESSION['cart'] = array();
-                    while ($row = mysqli_fetch_array($this->allproducts)) {
-                        $single_id = $row['ID'];
-                        $_SESSION['cart'][$single_id] = 0;
-                    }
-                } catch (Exception $e) {
-                    Util::logError($e);
-                    $this->genericerr = 'Something went wrong, please try again later!';
+                $_SESSION['cart'] = array();
+                foreach ($this->allproducts as $row) {
+                    $row = (array)$row;
+                    $single_id = $row['ID'];
+                    $_SESSION['cart'][$single_id] = 0;
                 }
             }
             if ($_SESSION['cart'][$id] >= 0) {
@@ -57,7 +53,7 @@ class ShopModel extends PageModel
                 break;
             case 'placeOrder';
                 try {
-                    registerOrder();
+                    $this->crud->createNewOrder();
                 } catch (Exception $e) {
                     Util::logError($e);
                     $this->genericerr = 'Something went wrong, please try again later!';
@@ -69,7 +65,7 @@ class ShopModel extends PageModel
                 break;
         }
     }
-    private function getItemsInCart()
+    private function getItemsInCart() //
     {
         $items = array();
         if (!empty($_SESSION['cart']))
@@ -78,18 +74,17 @@ class ShopModel extends PageModel
         }
         return $items;
     }
-    public function setProductID()
+    public function setProductID() //
     {
         $this->productID = Util::getGETvar('page');
     }
-    public function setSingleProduct()
+    public function setSingleProduct() //
     {
         try
         {
-            $this->singleproduct = getSingleProduct($this->productID);
-        } catch (Exception $e) {
+            $this->singleproduct = (array)$this->crud->readSingleProduct($this->productID);
+        } catch (PDOException $e) {
             Util::logError($e);
-            $this->genericerr = 'Something went wrong, please try again later!';
         }
         
     }
