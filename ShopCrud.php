@@ -1,6 +1,6 @@
 <?php
 
-class UserCrud
+class ShopCrud
 {
     private $crud;
     private $genericException;
