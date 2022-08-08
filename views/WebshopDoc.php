@@ -21,8 +21,9 @@ class WebshopDoc extends ProductDoc
     }
     protected function showContent()
     {
-        while ($product = mysqli_fetch_array($this->model->allproducts))
+        foreach ($this->model->allproducts as $product)
         {
+            $product = (array)$product;
             echo '<div class="menu">';
             $this->showProduct($product['ID'], $product['filename_image'], $product['name'], $product['price']);
             if (isset($_SESSION['login']))
