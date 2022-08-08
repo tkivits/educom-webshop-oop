@@ -13,8 +13,7 @@ class ShopCrud
     {
         $items = array_filter($_SESSION['cart']);
         $user_id = $_SESSION['user_id'];
-        $total = number_format(array_sum($_SESSION['total']), 2);
-        $shopParams = array(':user_id' => $user_id, ':total' => $total);
+        $shopParams = array(':user_id' => $user_id);
         $order_id = $this->crud->createOrderRow($shopParams);
         if (!$order_id)
         {

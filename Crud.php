@@ -33,7 +33,7 @@ class Crud
     }
     public function createOrderRow($array)
     {
-        $sql = 'INSERT INTO orders (user_id, total) VALUES (:user_id, :total)';
+        $sql = 'INSERT INTO orders (user_id) VALUES (:user_id)';
         $stmt = $this->pdo->prepare($sql);
         $stmt->setFetchMode(PDO::FETCH_OBJ);
         $stmt->execute($array);
