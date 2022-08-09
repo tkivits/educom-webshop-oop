@@ -29,7 +29,7 @@ class UserCrud implements IUserCrud
         $result = $this->crud->readOneRow($table, $row, $email);
         if (!$result)
         {
-            $result = array('email'=>'','password'=>'');
+            $result = null;
         }
         return $result;
     }
