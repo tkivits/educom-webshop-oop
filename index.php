@@ -1,8 +1,9 @@
 <?php
 session_start();
-require_once 'controllers/PageController.php';
-require_once 'models/PageModel.php';
-require_once 'Crud.php';
+$parent = dirname(__FILE__);
+require_once $parent.'/controllers/PageController.php';
+require_once $parent.'/models/PageModel.php';
+require_once $parent.'/Crud.php';
 
 $crud = new Crud();
 $model = new PageModel(null, $crud);

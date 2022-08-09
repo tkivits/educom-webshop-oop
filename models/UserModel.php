@@ -1,5 +1,5 @@
 <?php
-require_once 'PageModel.php';
+require_once $parent.'/models/PageModel.php';
 class UserModel extends PageModel
 {
   public $sal = '';

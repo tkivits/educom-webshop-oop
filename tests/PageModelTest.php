@@ -1,5 +1,7 @@
 <?php
-require_once '../models/PageModel.php';
+$parent = dirname(dirname(__FILE__));
+require_once $parent.'/models/PageModel.php';
+require_once $parent.'/StaticUtilClass.php';
 
 use PHPUnit\Framework\TestCase;
 

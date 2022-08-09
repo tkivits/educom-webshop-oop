@@ -1,10 +1,10 @@
 <?php
-require_once 'models/UserModel.php';
-require_once 'models/ShopModel.php';
-require_once 'UserCrud.php';
-require_once 'ShopCrud.php';
-require_once 'StaticUtilClass.php';
-require_once 'dataLayer.php';
+require_once $parent.'/models/UserModel.php';
+require_once $parent.'/models/ShopModel.php';
+require_once $parent.'/UserCrud.php';
+require_once $parent.'/ShopCrud.php';
+require_once $parent.'/StaticUtilClass.php';
+require_once $parent.'/dataLayer.php';
 
 class PageController
 {
