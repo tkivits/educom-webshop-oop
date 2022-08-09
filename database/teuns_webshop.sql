@@ -29,8 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `orders` (
   `ID` int(3) NOT NULL,
-  `user_id` int(3) NOT NULL,
-  `total` decimal(10,2) NOT NULL
+  `user_id` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -38,23 +37,23 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`ID`, `user_id`, `total`) VALUES
-(6, 1, '51.96'),
-(7, 1, '51.96'),
-(8, 1, '86.96'),
-(9, 2, '45.98'),
-(10, 1, '42.97'),
-(11, 1, '42.97'),
-(12, 1, '64.94'),
-(13, 1, '44.98'),
-(14, 2, '49.95'),
-(15, 2, '53.98'),
-(16, 2, '52.97'),
-(17, 2, '200.00'),
-(18, 1, '89.96'),
-(19, 1, '89.96'),
-(20, 1, '43.98'),
-(21, 2, '22.99'),
-(22, 1, '154.93');
+(6, 1),
+(7, 1),
+(8, 1),
+(9, 2),
+(10, 1),
+(11, 1),
+(12, 1),
+(13, 1),
+(14, 2),
+(15, 2),
+(16, 2),
+(17, 2),
+(18, 1),
+(19, 1),
+(20, 1),
+(21, 2),
+(22, 1);
 
 -- --------------------------------------------------------
 
@@ -148,8 +147,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`ID`, `email`, `name`, `password`) VALUES
 (1, 'coach@man-kind.nl', 'Geert Weggemans', 'halt!'),
-(2, 't.kivits@hotmail.com', 'Teun Kivits', 'test'),
-(4, 't.kivits@hotmail.com', 'Teun Kivits', 'test');
+(2, 't.kivits@hotmail.com', 'Teun Kivits', 'test');
 
 --
 -- Indexen voor geëxporteerde tabellen
