@@ -1,6 +1,7 @@
 <?php
+require_once 'Interfaces/ICrud.php';
 
-class Crud 
+class Crud implements ICrud
 {
     private $connstring;
     private $dbuser;
