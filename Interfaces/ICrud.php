@@ -4,10 +4,10 @@ interface ICrud
 {
     function createUserRow($array);
     function createOrderRow($array);
-    public function createOrderItemsRow($order_id, $array);
-    public function readOneRow($table, $row, $value);
-    public function readMultipleRows($table, $row, $value);
-    public function readTable($table);
+    function createOrderItemsRow($order_id, $array);
+    function readOneRow($table, $row, $value);
+    function readMultipleRows($table, $row, $value);
+    function readTable($table);
 }
 
 ?>

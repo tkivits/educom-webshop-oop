@@ -1,6 +1,7 @@
 <?php
+require_once
 
-class ShopCrud
+class ShopCrud implements IShopCrud
 {
     private $crud;
     private $genericException;
