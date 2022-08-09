@@ -1,6 +1,7 @@
 <?php
+include_once 'Interfaces/IUserCrud.php';
 
-class UserCrud
+class UserCrud implements IUserCrud
 {
     private $crud;
     public function __construct($crud)

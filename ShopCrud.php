@@ -1,5 +1,5 @@
 <?php
-require_once
+include_once 'Interfaces/IShopCrud.php';
 
 class ShopCrud implements IShopCrud
 {

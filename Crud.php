@@ -1,5 +1,5 @@
 <?php
-require_once 'Interfaces/ICrud.php';
+include_once 'Interfaces/ICrud.php';
 
 class Crud implements ICrud
 {
