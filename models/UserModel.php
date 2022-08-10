@@ -108,8 +108,11 @@ class UserModel extends PageModel
       }
       if (empty($this->genericerr) && empty($this->namerr) && empty($this->emailerr) && empty($this->pwerr) && empty($this->pwrepeaterr)) {
         try {
-          $this->crud->createNewUser($this->email, $this->name, $this->pw);
-          $this->valid = True;
+          $result = $this->crud->createNewUser($this->email, $this->name, $this->pw);
+          if (!empty($result))
+          {
+            $this->valid = True;
+          }
         } catch (PDOException $e) {
           Util::logError($e);
           $this->genericerr = 'Something went wrong, please try again later!';
