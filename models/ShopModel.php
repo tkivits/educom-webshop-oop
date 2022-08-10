@@ -1,4 +1,5 @@
 <?php
+require_once $parent.'/models/PageModel.php';
 class ShopModel extends PageModel
 {
     public $allproducts;
