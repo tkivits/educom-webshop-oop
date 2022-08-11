@@ -62,6 +62,18 @@ class Crud implements ICrud
         }
         return $this->pdo->lastInsertId();
     }
+    public function createRatingsRow($array)
+    {
+        $sql = 'INSERT INTO ratings (product_id, rating, user_id) VALUES (:product_id, :rating, :user_id)';
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->setFetchMode(PDO::FETCH_OBJ);
+        $stmt->execute($array);
+        if (!$this->pdo->lastInsertId())
+        {
+            throw new Exception('Failed to register new user.');
+        }
+        return $this->pdo->lastInsertId();
+    }
     public function readOneRow($table, $row, $value)
     {
         $sql = 'SELECT * FROM '.$table.' WHERE '.$row.' = :value';
@@ -85,6 +97,15 @@ class Crud implements ICrud
     public function readTable($table)
     {
         $sql = 'SELECT * FROM '.$table;
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->setFetchMode(PDO::FETCH_OBJ);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+        return $result;
+    }
+    public function readAverageRatingForProduct($product)
+    {
+        $sql = 'SELECT AVG(rating) FROM ratings WHERE product_id = '.$product;
         $stmt = $this->pdo->prepare($sql);
         $stmt->setFetchMode(PDO::FETCH_OBJ);
         $stmt->execute();
