@@ -1,6 +1,6 @@
 <?php
 
-class AJAXcontroller
+class Ajaxcontroller
 {
     public $model;
     public function __construct($model)

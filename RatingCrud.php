@@ -40,7 +40,7 @@ class RatingCrud
         {
             throw new Exception ($this->genericException);
         }
-        return $avgRating
+        return $avgRating;
     }
     public function updateRating($rating, $userID, $productID)
     {
