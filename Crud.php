@@ -109,8 +109,29 @@ class Crud implements ICrud
         $stmt = $this->pdo->prepare($sql);
         $stmt->setFetchMode(PDO::FETCH_OBJ);
         $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_OBJ);
+        return $result;
+    }
+    public function readAverageRatingForAllProducts()
+    {
+        $sql = 'SELECT AVG(rating), product_id FROM ratings GROUP BY product_id';
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->setFetchMode(PDO::FETCH_OBJ);
+        $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_OBJ);
         return $result;
+    }
+    public function updateRating($array)
+    {
+        $sql = 'UPDATE ratings SET rating = :rating WHERE user_id = :user_id AND product_id = :product_id';
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->setFetchMode(PDO::FETCH_OBJ);
+        $stmt->execute($array);
+        if (!$this->pdo->lastInsertId())
+        {
+            throw new Exception('Failed to update rating.');
+        }
+        return $this->pdo->lastInsertId();
     }
 }
 

@@ -23,6 +23,13 @@ class RatingCrud
     public function readAllRatings()
     {
         // Read average ratings for all products
+
+        $avgRating = $this->crud->readAverageRatingForAllProducts();
+        if (!$avgRating)
+        {
+            throw new Exception ($this->genericException);
+        }
+        return $avgRating;
     }
     public function readRatingForProduct($productID)
     {
@@ -35,9 +42,16 @@ class RatingCrud
         }
         return $avgRating
     }
-    public function updateRating($userID)
+    public function updateRating($rating, $userID, $productID)
     {
         // Update rating for specific user and product
+
+        $params = array(':rating' => $rating, ':user_id' => $userID, ':product_id' => $productID);
+        $result = $this->crud->updateRating($params);
+        if (!$result)
+        {
+            throw new Exception ($this->genericException);
+        }
     }
 }
 ?>
