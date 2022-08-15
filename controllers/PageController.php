@@ -88,7 +88,7 @@ class PageController
                 } else {
                     include_once 'views/Ajaxdoc.php';
                     $this->ajaxcontroller = new Ajaxcontroller($this->ajaxcontroller);
-                    $this->ajaxcontroller->view->JsonEncodeOneRating($this->model->page);
+                    $this->ajaxcontroller->view->JsonEncodeAllRatings();
                     $this->model->crud = new ShopCrud($this->model->crud);
                     $this->model = new ShopModel($this->model, $this->model->crud);
                     $this->model->setProductID();
