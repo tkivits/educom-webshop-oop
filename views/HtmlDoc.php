@@ -12,7 +12,7 @@ class HtmlDoc
     {
         echo '<head>';
     }
-    private function showHeadContent() 
+    protected function showHeadContent() 
     {
         echo '<link rel="stylesheet" href="CSS/stylesheet.css">';
     }

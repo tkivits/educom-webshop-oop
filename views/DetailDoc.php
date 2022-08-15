@@ -1,8 +1,14 @@
 <?php
 require_once 'ProductDoc.php';
-require_once 'dataLayer.php';
+
 class DetailDoc extends ProductDoc 
 {
+    protected function showHeadContent() 
+    {
+        echo '<link rel="stylesheet" href="CSS/stylesheet.css">';
+        echo '<script src="js/jquery.js"></script>';
+        echo '<script src="js/Rating.js"></script>';
+    }
     protected function showStars($id)
     {
         echo '<div class="starcontainer" data-value="'.$id.'">';
