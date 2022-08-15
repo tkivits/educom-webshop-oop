@@ -3,14 +3,14 @@ require_once 'ProductDoc.php';
 require_once 'dataLayer.php';
 class DetailDoc extends ProductDoc 
 {
-    protected function showStars()
+    protected function showStars($id)
     {
-        echo '<div class="starcontainer">';
-        echo '<span class="star">&starf;</span>';
-        echo '<span class="star">&starf;</span>';
-        echo '<span class="star">&starf;</span>';
-        echo '<span class="star">&starf;</span>';
-        echo '<span class="star">&starf;</span>';
+        echo '<div class="starcontainer" data-value="'.$id.'">';
+        echo '<span class="star" data-value="1"></span>';
+        echo '<span class="star" data-value="2"></span>';
+        echo '<span class="star" data-value="3"></span>';
+        echo '<span class="star" data-value="4"></span>';
+        echo '<span class="star" data-value="5"></span>';
         echo '</div>';
     }
     protected function showProduct($id, $image, $name, $price) 
@@ -18,7 +18,7 @@ class DetailDoc extends ProductDoc
         echo '<a href="?page='.$id.'">';
         echo '<img class="productimg" src="'.$image.'" alt="'.$name.'"/>';
         echo '</a>';
-        $this->showStars();
+        $this->showStars($id);
         echo '<div class="title">'.$name.'</div></li>';
         echo '<div class="price">'.$price.'</div></li>';
     }
