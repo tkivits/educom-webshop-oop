@@ -6,8 +6,8 @@ class WebshopDoc extends ProductDoc
     protected function showHeadContent() 
     {
         echo '<link rel="stylesheet" href="CSS/stylesheet.css">';
-        echo '<script src="js/jquery.js></script>';
-        echo '<script src="js/Rating.js></script>';
+        echo '<script src="js/jquery.js"></script>';
+        echo '<script src="js/Rating.js"></script>';
     }
     protected function showStars($id)
     {
