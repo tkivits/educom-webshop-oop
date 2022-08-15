@@ -14,10 +14,11 @@ $(document).ready( function() {
             console.log(productID);
             rating = ratings[productID - 1].Average;
             console.log(rating);
-            $(".star").each( (index, elem) => {
-                const itemValue = $(elem).attr("data-value")
+            console.log(elem);
+            $(".star", elem).each( (index, el) => {
+                const itemValue = $(el).attr("data-value")
                 if(itemValue <= rating) {
-                    $(elem).html("&starf;")
+                    $(el).html("&starf;")
                 }
             })
         })
@@ -25,4 +26,6 @@ $(document).ready( function() {
 
     /// Find spans with class star
     $(".star").html("&star;")
+
+    // Functie om data te posten
 });
