@@ -1,8 +1,11 @@
 <?php
+require_once $parent.'/controllers/AjaxController.php';
 require_once $parent.'/models/UserModel.php';
 require_once $parent.'/models/ShopModel.php';
+require_once $parent.'/models/AjaxModel.php';
 require_once $parent.'/UserCrud.php';
 require_once $parent.'/ShopCrud.php';
+require_once $parent.'/RatingCrud.php';
 require_once $parent.'/StaticUtilClass.php';
 require_once $parent.'/dataLayer.php';
 
@@ -13,6 +16,7 @@ class PageController
     public function __construct($model)
     {
         $this->model = $model;
+        $this->ajaxcontroller = null;
     }
     public function handleRequest()
     {
@@ -69,6 +73,9 @@ class PageController
                 $this->model->page = 'Home';
                 break;
             case 'Webshop';
+                include_once 'views/Ajaxdoc.php';
+                $this->ajaxcontroller = new Ajaxcontroller($this->ajaxcontroller);
+                $this->ajaxcontroller->view->JsonEncodeAllRatings();
                 $this->model->crud = new ShopCrud($this->model->crud);
                 $this->model = new ShopModel($this->model, $this->model->crud);
                 $this->model->addToCart();
@@ -79,6 +86,9 @@ class PageController
                 {
                     $this->model->genericerr = 'Something went wrong, please try again later!';
                 } else {
+                    include_once 'views/Ajaxdoc.php';
+                    $this->ajaxcontroller = new Ajaxcontroller($this->ajaxcontroller);
+                    $this->ajaxcontroller->view->JsonEncodeOneRating($this->model->page);
                     $this->model->crud = new ShopCrud($this->model->crud);
                     $this->model = new ShopModel($this->model, $this->model->crud);
                     $this->model->setProductID();

@@ -2,18 +2,17 @@
 
 class Ajaxcontroller
 {
-    public $model;
-    public function __construct($model)
+    public function __construct($copy)
     {
-        $this->model = $model;
-    }
-    public function processRequest()
-    {
-        // Variabele uit url ophalen en doorgeven aan model
-        $func = Util::getGETvar('function');
-        if ($func = 'getRating')
-        {
-           $this->productID = Util::getGetvar('id');
+        if (empty($copy)){
+            $this->crud = new Crud;
+            $this->crud = new RatingCrud($this->crud);
+            $this->model = new AjaxModel(null, $this->crud);
+            $this->view = new AjaxDoc($this->model);
+        } else {
+            $this->crud = $copy->crud;
+            $this->model = $copy->model;
+            $this->view = $copy->view;
         }
     }
 }

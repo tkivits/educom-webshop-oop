@@ -12,6 +12,6 @@ $ratingCrud = new RatingCrud($crud);
 $model = new AjaxModel(null, $ratingCrud);
 $view = new AjaxDoc($model);
 
-$view->show();
+$view->JsonEncodeOneRating();
 
 ?>

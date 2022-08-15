@@ -105,7 +105,7 @@ class Crud implements ICrud
     }
     public function readAverageRatingForProduct($product)
     {
-        $sql = 'SELECT AVG(rating) FROM ratings WHERE product_id = '.$product;
+        $sql = 'SELECT ROUND(AVG(rating), 0) FROM ratings WHERE product_id = '.$product;
         $stmt = $this->pdo->prepare($sql);
         $stmt->setFetchMode(PDO::FETCH_OBJ);
         $stmt->execute();
@@ -114,7 +114,7 @@ class Crud implements ICrud
     }
     public function readAverageRatingForAllProducts()
     {
-        $sql = 'SELECT AVG(rating), product_id FROM ratings GROUP BY product_id';
+        $sql = 'SELECT ROUND(AVG(rating), 0), product_id FROM ratings GROUP BY product_id';
         $stmt = $this->pdo->prepare($sql);
         $stmt->setFetchMode(PDO::FETCH_OBJ);
         $stmt->execute();
