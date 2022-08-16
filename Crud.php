@@ -9,7 +9,7 @@ class Crud implements ICrud
     private $pdo;
     public function __construct()
     {
-        $this->connstring = 'mysql:host=localhost;dbname=teuns_webshop';
+        $this->connstring = 'mysql:host=127.0.0.1;dbname=teuns_webshop';
         $this->dbuser = 'WebShopUser';
         $this->dbpassword = '1VyldCNbXjpb';
         try {
