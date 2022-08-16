@@ -7,7 +7,7 @@ require_once $parent.'/UserCrud.php';
 require_once $parent.'/ShopCrud.php';
 require_once $parent.'/RatingCrud.php';
 require_once $parent.'/StaticUtilClass.php';
-require_once $parent.'/dataLayer.php';
+include_once $parent.'/views/AjaxDoc.php';
 
 class PageController
 {
@@ -22,10 +22,10 @@ class PageController
     {
         $action = Util::getPOSTvar('action');
         if($action != null && $action == 'ajax') {
-            echo "success!";
+            $this->ajaxcontroller = new Ajaxcontroller($this->ajaxcontroller);
+            $this->ajaxcontroller->processRequest();
             return;
         } 
-
         $this->getRequest();
         $this->processRequest();
         $this->showResponse();
@@ -80,7 +80,6 @@ class PageController
                 $this->model->page = 'Home';
                 break;
             case 'Webshop';
-                include_once 'views/Ajaxdoc.php';
                 $this->ajaxcontroller = new Ajaxcontroller($this->ajaxcontroller);
                 $this->ajaxcontroller->view->JsonEncodeAllRatings();
                 $this->model->crud = new ShopCrud($this->model->crud);
@@ -93,7 +92,6 @@ class PageController
                 {
                     $this->model->genericerr = 'Something went wrong, please try again later!';
                 } else {
-                    include_once 'views/Ajaxdoc.php';
                     $this->ajaxcontroller = new Ajaxcontroller($this->ajaxcontroller);
                     $this->ajaxcontroller->view->JsonEncodeAllRatings();
                     $this->model->crud = new ShopCrud($this->model->crud);

@@ -15,6 +15,20 @@ class Ajaxcontroller
             $this->view = $copy->view;
         }
     }
+    public function processRequest()
+    {
+        if ($_SESSION['login'] == True)
+        {
+            $productID = Util::getPOSTvar('id');
+            $rating = Util::getPOSTvar('rating');
+            $oldrating = $this->crud->readExistingRating($productID, $_SESSION['user_id']);
+            if (!$oldrating) {
+                $this->crud->createNewRating($productID, $rating, $_SESSION['user_id']);
+            } else {
+                $this->crud->updateRating($rating, $_SESSION['user_id'], $productID);
+            }
+        }
+    }
 }
 
 ?>

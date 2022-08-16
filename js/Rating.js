@@ -28,6 +28,6 @@ $(document).ready( function() {
         const rating = $(this).attr('data-value');
         const product_id = $(this).attr('id-value');
         console.log({product_id, rating});
-        $.post('index.php', {action: 'ajax', id: product_id, rating: rating}, function(data) {console.log(data)})
+        $.post('index.php', {action: 'ajax', id: product_id, rating: rating}, function(data) {console.log(data)});
     })
 });

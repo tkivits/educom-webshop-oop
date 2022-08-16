@@ -42,6 +42,20 @@ class RatingCrud
         }
         return $avgRating;
     }
+    public function readExistingRating($productID, $userID)
+    {
+        $table = 'ratings';
+        $rowOne = 'product_id';
+        $rowTwo = 'user_id';
+        $valueOne = $productID;
+        $valueTwo = $userID;
+        $result = $this->crud->readOneRowByTwoVal($table, $rowOne, $rowTwo, $valueOne, $valueTwo);
+        if (!$result) {
+            return null;
+        } else {
+            return $result;
+        }
+    }
     public function updateRating($rating, $userID, $productID)
     {
         // Update rating for specific user and product

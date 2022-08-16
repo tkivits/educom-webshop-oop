@@ -84,6 +84,17 @@ class Crud implements ICrud
         $result = $stmt->fetch(PDO::FETCH_OBJ);
         return $result;
     }
+    public function readOneRowByTwoVal($table, $rowOne, $rowTwo, $valueOne, $valueTwo)
+    {
+        $sql = 'SELECT * FROM '.$table.' WHERE '.$rowOne.' = :valueOne AND '.$rowTwo.' = :valueTwo';
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(':valueOne', $valueOne);
+        $stmt->bindValue(':valueTwo', $valueTwo);
+        $stmt->setFetchMode(PDO::FETCH_OBJ);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_OBJ);
+        return $result;
+    }
     public function readMultipleRows($table, $row, $value)
     {
         $sql = 'SELECT * FROM '.$table.' WHERE '.$row.' = :value';
@@ -127,11 +138,11 @@ class Crud implements ICrud
         $stmt = $this->pdo->prepare($sql);
         $stmt->setFetchMode(PDO::FETCH_OBJ);
         $stmt->execute($array);
-        if (!$this->pdo->lastInsertId())
+        if (!$stmt->rowCount())
         {
             throw new Exception('Failed to update rating.');
         }
-        return $this->pdo->lastInsertId();
+        return $stmt->rowCount();
     }
 }
 
