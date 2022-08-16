@@ -20,6 +20,12 @@ class PageController
     }
     public function handleRequest()
     {
+        $action = Util::getPOSTvar('action');
+        if($action != null && $action == 'ajax') {
+            echo "success!";
+            return;
+        } 
+
         $this->getRequest();
         $this->processRequest();
         $this->showResponse();
@@ -30,6 +36,7 @@ class PageController
     }
     private function processRequest()
     {
+        
         switch($this->model->page)
         {
             case 'Contact';

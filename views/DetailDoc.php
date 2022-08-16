@@ -12,11 +12,11 @@ class DetailDoc extends ProductDoc
     protected function showStars($id)
     {
         echo '<div class="starcontainer" data-value="'.$id.'">';
-        echo '<span class="star" data-value="1"></span>';
-        echo '<span class="star" data-value="2"></span>';
-        echo '<span class="star" data-value="3"></span>';
-        echo '<span class="star" data-value="4"></span>';
-        echo '<span class="star" data-value="5"></span>';
+        echo '<span class="star" data-value="1" id-value="'.$id.'"></span>';
+        echo '<span class="star" data-value="2" id-value="'.$id.'"></span>';
+        echo '<span class="star" data-value="3" id-value="'.$id.'"></span>';
+        echo '<span class="star" data-value="4" id-value="'.$id.'"></span>';
+        echo '<span class="star" data-value="5" id-value="'.$id.'"></span>';
         echo '</div>';
     }
     protected function showProduct($id, $image, $name, $price) 
