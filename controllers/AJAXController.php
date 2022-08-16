@@ -17,7 +17,7 @@ class Ajaxcontroller
     }
     public function processRequest()
     {
-        if ($_SESSION['login'] == True)
+        if (isset($_SESSION['login']))
         {
             $productID = Util::getPOSTvar('id');
             $rating = Util::getPOSTvar('rating');
@@ -27,6 +27,7 @@ class Ajaxcontroller
             } else {
                 $this->crud->updateRating($rating, $_SESSION['user_id'], $productID);
             }
+            $this->view->JsonEncodeAllRatings();
         }
     }
 }
